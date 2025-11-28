@@ -1,7 +1,23 @@
 @import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+html, body {
+  height: 100%;
+}
+
+@layer utilities {
+  .flex-center_ {
+    @apply flex items-center justify-center;
+  }
+  .flex-between_ {
+    @apply flex items-center justify-between;
+  }
+  .flex-col-center_ {
+    @apply flex flex-col items-center justify-center;
+  }
+  .flex-col-start_ {
+    @apply flex flex-col items-start justify-center;
+  }
+  .card_ {
+    @apply rounded-xl p-4;
+  }
 }

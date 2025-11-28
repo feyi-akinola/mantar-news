@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SideBar from "../components/SideBar";
+import NavBar from "../components/NavBar";
 
 export const metadata: Metadata = {
   title: "Mantar News",
-  description: "Mantar News is a news website that provides the latest news and updates from the world.",
+  description: "Mantar News is a news website that provides the latest news and updates from all around the world.",
 };
 
 export default function RootLayout({
@@ -14,9 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="antialiased"
+        className="antialiased flex bg-gray-200 min-h-screen h-full"
       >
-        {children}
+        <SideBar />
+
+        <div className="flex-7 flex flex-col h-full w-full">
+          <NavBar />
+          {children}
+        </div>
       </body>
     </html>
   );
