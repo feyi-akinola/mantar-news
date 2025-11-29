@@ -33,7 +33,7 @@ const SideBar = () => {
         backgroundColor: "white",
         display: "flex",
         flexDirection: "column",
-        flex: 3,
+        flex: 2.5,
         gap: "1rem",
       }}
     >
@@ -42,7 +42,7 @@ const SideBar = () => {
       {/* Recommended */}
       <div className="flex-between_ mt-4">
         <h2 className="text-xl font-bold">Recommended</h2>
-        <button className="text-sm font-medium text-gray-400">View All</button>
+        <button className="text-sm font-regular text-gray-400">View All</button>
       </div>
 
       <NewsMedium />

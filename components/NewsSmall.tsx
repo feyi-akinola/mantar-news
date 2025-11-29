@@ -11,7 +11,7 @@ export default function NewsSmall({ item, isLast }: { item: any, isLast: boolean
             </div>
 
             <div className="flex-center_ gap-1">
-              <p className="text-xs font-medium text-gray-400">{item.time}</p>
+              <p className="text-xs font-regular text-gray-400">{item.time}</p>
               <ClockIcon className="w-4 h-4 stroke-gray-400" />
             </div>
           </div>

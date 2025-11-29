@@ -2,7 +2,164 @@
 
 html, body {
   height: 100%;
+  font-family: "MullerNextWideTrial", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
+
+/* MullerNextWideTrial Thin */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-Thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Thin Italic */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-ThinItalic.otf") format("opentype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Light */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Light Italic */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Regular */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Regular Italic */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Medium */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Medium Italic */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial SemiBold */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial SemiBold Italic */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-SemiBoldItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Bold */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-ExtraBold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Bold Italic */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-ExtraBoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial ExtraBold */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial ExtraBold Italic */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-ExtraBoldItalic.otf") format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Heavy */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-Heavy.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MullerNextWideTrial Heavy Italic */
+@font-face {
+  font-family: "MullerNextWideTrial";
+  src: url("/fonts/muller-next/MullerNextWideTrial-HeavyItalic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* MullerNextExpandedTrial ExtraBold */
+@font-face {
+  font-family: "MullerNextExpandedTrial";
+  src: url("/fonts/muller-next/MullerNextExpandedTrial-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 
 @layer utilities {
   .flex-center_ {
@@ -19,5 +176,8 @@ html, body {
   }
   .card_ {
     @apply rounded-xl p-4;
+  }
+  .font-expanded {
+    font-family: "MullerNextExpandedTrial", "MullerNextWideTrial", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
 }
