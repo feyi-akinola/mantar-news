@@ -1,35 +1,54 @@
 "use client";
 
+// Libraries
 import { Squircle } from "corner-smoothing";
+import axios, { AxiosResponse } from "axios";
+
+// Components
 import SearchBar from "@/components/SearchBar";
 import NewsSmall from "@/components/NewsSmall";
 import NewsMedium from "@/components/NewsMedium";
 import ViewAll from "@/components/ViewAll";
 
+// Hooks
+import { useEffect, useState } from "react";
+
+// Types
+import { NewsArticle } from "@/types/newsArticle";
+
+// Constants
+import { API_URL } from "@/constants";
+
 const SideBar = () => {
-  const recommended = [
-    {
-      title: "The best way to learn React",
-      description: "Learn React in 30 days. React is a JavaScript library for building user interfaces.",
-      category: "React",
-      time: "10 minutes ago",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      title: "Learning Next.js in 2025",
-      description: "The best way to learn Next.js in 2025. Next.js is a React framework for building server-side applications.",
-      category: "Next.js",
-      time: "30 minutes ago",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      title: "The best way to learn React",
-      description: "Learn React in 30 days. React is a JavaScript library for building user interfaces.",
-      category: "React",
-      time: "1 hour ago",
-      image: "https://via.placeholder.com/150",
-    },
-  ];
+
+  const [hasFetchedRecommended, setHasFetchedRecommended] = useState(false);
+  const [recommended, setRecommended] = useState<NewsArticle[]>([]);
+
+  const fetchRecommended = async () => {
+    const response: AxiosResponse = await axios.get(API_URL);
+    const data = await response.data.data ?? [];
+    const status = response.status;
+
+    if (status === 200) {
+      setRecommended(data);
+      setHasFetchedRecommended(true);
+
+      return data;
+    } else {
+      throw new Error("Failed to fetch recommended");
+    }
+  };
+
+  useEffect(() => {
+    if (!hasFetchedRecommended) {
+      try {
+        fetchRecommended();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }, [hasFetchedRecommended]);
+  
 
   return (
     <Squircle

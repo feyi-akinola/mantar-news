@@ -1,5 +1,8 @@
 import { Squircle } from "corner-smoothing";
 
+// Utils
+import { capitalizeFirstLetter } from "@/utils/string";
+
 const CategoryChip = ({ category }: { category: string }) => {
   return (
     <Squircle
@@ -10,7 +13,9 @@ const CategoryChip = ({ category }: { category: string }) => {
         width: "fit-content",
       }}
     >
-      <p className="text-xs text-blue-500 font-bold">{category}</p>
+      <p className="text-xs text-blue-500 font-bold">
+        {capitalizeFirstLetter(category)}
+      </p>
     </Squircle>
   );
 };

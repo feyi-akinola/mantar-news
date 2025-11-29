@@ -37,19 +37,12 @@ const NavBar = () => {
         />
       </a>
 
-      <div className="flex gap-4">
+      <div className="flex gap-12">
         {
           categories.map((category) => (
-            <div
-              key={category.name}
-              className="flex gap-1.5 bg-gray-300 rounded-full px-4 py-2"
-            >
-              {/* {category.icon} */}
-              <p className="text-xs text-black/85
-                transition-all duration-300 cursor-pointer font-bold">
-                {category.name}
-              </p>
-            </div>
+            <p className="button-text_ text-xs text-black/55 font-bold">
+              {category.name}
+            </p>
           ))
         }
       </div>
