@@ -1,8 +1,12 @@
+import NewsMain from "@/components/NewsMain";
+import Trending from "@/components/Trending";
 
 export default function Home() {
   return (
-    <div className="flex h-full items-center justify-center text-black">
-      <h1 className="text-4xl font-bold text-gray-400">Main</h1>
+    <div className="m-4 flex flex-col-start_ gap-16">
+      <NewsMain />
+
+      <Trending />
     </div>
   );
 }

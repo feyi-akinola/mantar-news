@@ -6,13 +6,14 @@ const SearchBar = () => {
     <Squircle
       cornerRadius={15}
       style={{
-        padding: "1rem 1.2rem",
+        padding: "0.75rem 1.5rem",
         backgroundColor: "#e5e7eb",
         color: "darkgray",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         gap: "0.5rem",
+        flexShrink: 0,
       }}
     >
       <input

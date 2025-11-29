@@ -1,4 +1,5 @@
 import { ClockIcon } from "lucide-react";
+import CategoryChip from "@/components/CategoryChip";
 
 export default function NewsSmall({ item, isLast }: { item: any, isLast: boolean }) {
   return (
@@ -6,9 +7,7 @@ export default function NewsSmall({ item, isLast }: { item: any, isLast: boolean
       <div className="flex-between_ gap-4 mb-4 w-full">
         <div className="flex-col-start_ gap-1">
           <div className="flex-between_ w-full gap-12">
-            <div className="flex-center_ bg-blue-100 rounded-full px-3 py-1">
-              <p className="text-xs text-blue-500 font-bold">{item.category}</p>
-            </div>
+            <CategoryChip category={item.category} />
 
             <div className="flex-center_ gap-1">
               <p className="text-xs font-regular text-gray-400">{item.time}</p>

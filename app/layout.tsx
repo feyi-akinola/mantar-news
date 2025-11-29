@@ -16,14 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="antialiased flex bg-gray-200 min-h-screen h-full"
+        className="antialiased flex bg-gray-200 text-black/90 min-h-screen h-full"
       >
-        <SideBar />
 
         <div className="flex-7 flex flex-col h-full w-full">
           <NavBar />
           {children}
         </div>
+        <SideBar />
       </body>
     </html>
   );
