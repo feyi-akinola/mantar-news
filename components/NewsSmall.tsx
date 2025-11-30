@@ -1,5 +1,4 @@
 // Libraries
-import { ClockIcon } from "lucide-react";
 import Image from "next/image";
 
 // Components
@@ -35,7 +34,6 @@ export default function NewsSmall({ item, isLast }: NewsSmallProps) {
                   <p className="text-xs font-regular text-gray-400">
                     {formatTime(item.published_at)}
                   </p>
-                  <ClockIcon className="w-4 h-4 stroke-gray-400" />
                 </div>
               ) : (
                 <PulseFiller />
@@ -45,12 +43,11 @@ export default function NewsSmall({ item, isLast }: NewsSmallProps) {
 
           {
             item ? (
-              <h3 className="font-bold">{item.title}</h3>
+              <h3 className="font-bold line-clamp-3">{item.title}</h3>
             ) : (
               <PulseFillerText lines={3} height={3.5} gap={2} />
             )
           }
-          {/* <p className="text-sm text-gray-500">{item.description}</p> */}
         </div>
 
         {

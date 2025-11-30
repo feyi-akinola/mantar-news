@@ -50,7 +50,7 @@ const SideBar = () => {
           setIsLoading(false);
         }
       }
-      };
+    };
     
       loadRecommended();
   }, [hasFetchedRecommended]);

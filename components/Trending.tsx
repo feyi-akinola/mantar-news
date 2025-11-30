@@ -1,5 +1,8 @@
 "use client";
 
+// Libraries
+import axios, { AxiosResponse } from "axios";
+
 // Components
 import NewsSmall from "./NewsSmall";
 import NewsMediumVert from "./NewsMediumVert";
@@ -10,21 +13,47 @@ import { useEffect, useState } from "react";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
+import { TRENDING_NEWS_URL } from "@/constants";
 
 const Trending = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [trending, setTrending] = useState<NewsArticle[]>([]);
 
+  const transformTrending = (data: any): NewsArticle[] => {
+    if (!data || !Array.isArray(data) || data.length === 0) {
+      return [];
+    }
+
+    return data.map((item: any): NewsArticle => ({
+      uuid: item.id,
+      title: item.title,
+      description: item.description,
+      image_url: item.image || "",
+      url: item.url,
+      published_at: item.publishedAt,
+      categories: ["general"],
+      language: item.lang,
+    }));
+  };
+
   const fetchTrending = async () => {
-    //
+    const response: AxiosResponse = await axios.get(TRENDING_NEWS_URL);
+    const data = await response.data.articles ?? [];
+    const status = response.status;
+
+    if (status === 200) {
+      setTrending(transformTrending(data));
+    }
   };
 
   useEffect(() => {
     const loadTrending = async () => {
       try {
-        fetchTrending();
+        await fetchTrending();
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -38,7 +67,7 @@ const Trending = () => {
         <ViewAll />
       </div>
 
-      <div className="grid grid-cols-3 w-full gap-4 bg-white card_">
+      <div className="grid grid-cols-3 w-full gap-8 bg-white card_">
         {
           isLoading
             ? (
