@@ -40,15 +40,19 @@ const SideBar = () => {
   };
 
   useEffect(() => {
-    if (!hasFetchedRecommended) {
-      try {
-        fetchRecommended();
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
+    const loadRecommended = async () => {
+      if (!hasFetchedRecommended) {
+        try {
+          await fetchRecommended();
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
+      };
+    
+      loadRecommended();
   }, [hasFetchedRecommended]);
 
   return (
