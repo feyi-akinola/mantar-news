@@ -40,7 +40,7 @@ const NavBar = () => {
       <div className="flex gap-12">
         {
           categories.map((category) => (
-            <p className="button-text_ text-xs text-black/55 font-bold">
+            <p key={category.name} className="button-text_ text-xs text-black/55 font-bold">
               {category.name}
             </p>
           ))

@@ -17,15 +17,15 @@ import { useEffect, useState } from "react";
 import { NewsArticle } from "@/types/newsArticle";
 
 // Constants
-import { API_URL } from "@/constants";
+import { RECOMMENDED_NEWS_URL } from "@/constants";
 
 const SideBar = () => {
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasFetchedRecommended, setHasFetchedRecommended] = useState(false);
   const [recommended, setRecommended] = useState<NewsArticle[]>([]);
 
   const fetchRecommended = async () => {
-    const response: AxiosResponse = await axios.get(API_URL);
+    const response: AxiosResponse = await axios.get(RECOMMENDED_NEWS_URL);
     const data = await response.data.data ?? [];
     const status = response.status;
 
@@ -45,10 +45,11 @@ const SideBar = () => {
         fetchRecommended();
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
   }, [hasFetchedRecommended]);
-  
 
   return (
     <Squircle
@@ -76,9 +77,17 @@ const SideBar = () => {
 
       <div className="p-2 overflow-y-auto">
         {
-          recommended.map((item, index) => (
-            <NewsSmall key={index} item={item} isLast={index === recommended.length - 1} />
-          ))
+          isLoading
+            ? (
+                Array.from({ length: 3 }).map((_, index) => (
+                  <NewsSmall key={index} />
+                ))
+              )
+            : (
+                recommended.map((item, index) => (
+                  <NewsSmall key={index} item={item} isLast={index === recommended.length - 1} />
+                ))
+              )
         }
       </div>
 

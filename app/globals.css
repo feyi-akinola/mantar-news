@@ -109,6 +109,9 @@ html, body {
   .flex-col-start_ {
     @apply flex flex-col items-start justify-center;
   }
+  .flex-col-end_ {
+    @apply flex flex-col justify-end;
+  }
   .card_ {
     @apply rounded-xl p-4;
   }

@@ -3,7 +3,7 @@ import Trending from "@/components/Trending";
 
 export default function Home() {
   return (
-    <div className="m-4 flex flex-col-start_ gap-16">
+    <div className="m-4 flex flex-col-start_ gap-16 overflow-y-auto">
       <NewsMain />
 
       <Trending />

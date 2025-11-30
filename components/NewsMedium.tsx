@@ -4,19 +4,7 @@ const NewsMedium = () => {
   return (
     <Squircle
       cornerRadius={20}
-      style={{
-        padding: "0.6rem 1rem",
-        marginBottom: "2rem",
-        width: "100%",
-        height: "220px",
-        backgroundColor: "#e5e7eb",
-        color: "black",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "0.5rem",
-        flexShrink: 0,
-      }}
+      className="w-full h-[220px] flex-center_mb-8 animate-pulse bg-gray-200"
     >
       <div></div>
     </Squircle>
