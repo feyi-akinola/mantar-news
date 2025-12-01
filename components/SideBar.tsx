@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 
 // Components
 import SearchBar from "@/components/SearchBar";
-import NewsSmall from "@/components/NewsSmall";
+import RecommendedArticle from "@/components/RecommendedArticle";
 import NewsMedium from "@/components/NewsMedium";
 import ViewAll from "@/components/ViewAll";
 
@@ -17,43 +17,52 @@ import { useEffect, useState } from "react";
 import { NewsArticle } from "@/types/newsArticle";
 
 // Constants
-import { RECOMMENDED_NEWS_URL } from "@/constants";
+import { TRENDING_NEWS_URL } from "@/constants";
 
 const SideBar = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [hasFetchedRecommended, setHasFetchedRecommended] = useState(false);
-  const [recommended, setRecommended] = useState<NewsArticle[]>([]);
+  const [trending, setTrending] = useState<NewsArticle[]>([]);
 
-  const fetchRecommended = async () => {
-    const response: AxiosResponse = await axios.get(RECOMMENDED_NEWS_URL);
-    const data = await response.data.data ?? [];
+  const transformTrending = (data: any): NewsArticle[] => {
+    if (!data || !Array.isArray(data) || data.length === 0) {
+      return [];
+    }
+
+    return data.map((item: any): NewsArticle => ({
+      uuid: item.id,
+      title: item.title,
+      description: item.description,
+      image_url: item.image || "",
+      url: item.url,
+      published_at: item.publishedAt,
+      categories: ["general"],
+      language: item.lang,
+    }));
+  };
+
+  const fetchTrending = async () => {
+    const response: AxiosResponse = await axios.get(TRENDING_NEWS_URL);
+    const data = await response.data.articles ?? [];
     const status = response.status;
 
     if (status === 200) {
-      setRecommended(data);
-      setHasFetchedRecommended(true);
-
-      return data;
-    } else {
-      throw new Error("Failed to fetch recommended");
+      setTrending(transformTrending(data));
     }
   };
 
   useEffect(() => {
-    const loadRecommended = async () => {
-      if (!hasFetchedRecommended) {
-        try {
-          await fetchRecommended();
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setIsLoading(false);
-        }
+    const loadTrending = async () => {
+      try {
+        await fetchTrending();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
-    
-      loadRecommended();
-  }, [hasFetchedRecommended]);
+
+    loadTrending();
+  }, []);
 
   return (
     <Squircle
@@ -84,12 +93,12 @@ const SideBar = () => {
           isLoading
             ? (
                 Array.from({ length: 3 }).map((_, index) => (
-                  <NewsSmall key={index} />
+                  <RecommendedArticle key={index} />
                 ))
               )
             : (
-                recommended.map((item, index) => (
-                  <NewsSmall key={index} item={item} isLast={index === recommended.length - 1} />
+                trending.map((item, index) => (
+                  <RecommendedArticle key={index} item={item} isLast={index === trending.length - 1} />
                 ))
               )
         }

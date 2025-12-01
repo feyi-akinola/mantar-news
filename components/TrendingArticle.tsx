@@ -1,6 +1,9 @@
 // Libraries
 import Image from "next/image";
 
+// Hooks
+import { useState, useEffect } from "react";
+
 // Components
 import CategoryChip from "@/components/CategoryChip";
 import { PulseFiller, PulseFillerText } from "@/components/PulseFiller";
@@ -11,12 +14,31 @@ import { NewsArticle } from "@/types/newsArticle";
 // Utils
 import { formatTime } from "@/utils/time";
 
-interface NewsSmallProps {
+interface TrendingArticleProps {
   item?: NewsArticle;
   isLast?: boolean;
+  isActive?: boolean;
+  onProgressComplete?: () => void;
 }
 
-export default function NewsSmall({ item, isLast }: NewsSmallProps) {
+export default function TrendingArticle({ item, isLast, isActive, onProgressComplete }: TrendingArticleProps) {
+  const [progress, setProgress] = useState<number>(0);
+
+  useEffect(() => {
+    if (!isActive) {
+      setProgress(0);
+      return;
+    }
+
+    // animate progress for 5s
+    setProgress(100);
+    const timer = setTimeout(() => {
+      onProgressComplete && onProgressComplete();
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [isActive]);
+
   return (
     <div className="flex-col-center_">
       <div className="flex-between_ gap-4 mb-4 w-full">
@@ -67,11 +89,20 @@ export default function NewsSmall({ item, isLast }: NewsSmallProps) {
         }
       </div>
 
-    {
-      !isLast && (
-        <div className="w-[80%] h-1 my-2 rounded-full bg-gray-100" />
-      )
-    }
+      {/* Divider */}
+      {/* {
+        !isLast && isInSideBar && (
+          <div className="w-[80%] h-1 my-2 rounded-full bg-gray-100" />
+        )
+      } */}
+
+      {/* Progress Bar */}
+      <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden mt-2">
+        <div
+          className="h-full bg-blue-500 transition-all duration-10000 ease-linear"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
     </div>
   );
 };
