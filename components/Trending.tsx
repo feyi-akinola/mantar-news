@@ -16,10 +16,7 @@ import { NewsArticle } from "@/types/newsArticle";
 interface TrendingProps {
   items: NewsArticle[];
   isLoading: boolean;
-  activeIndex: number;
-  onHover: (index: number, item: NewsArticle) => void;
-  pause: () => void;
-  resume: () => void;
+  onItemChange: (item: NewsArticle) => void;
 }
 
 const Trending = ({ items, isLoading, onItemChange  }: TrendingProps) => {
