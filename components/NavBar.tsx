@@ -1,7 +1,17 @@
+"use client";
+
+// Libraries
 import Image from "next/image";
-import { BrainIcon, ComputerIcon, DollarSignIcon, HeartIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
+import { BrainIcon, ComputerIcon, DollarSignIcon, HeartIcon, SunIcon, MoonIcon } from "lucide-react";
 
 const NavBar = () => {
+  const [mounted, setMounted] = useState<boolean>(false);
+  const { setTheme, resolvedTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
+
   const categories = [
     {
       name: "Technology",
@@ -37,13 +47,37 @@ const NavBar = () => {
         />
       </a>
 
-      <div className="flex gap-12">
+      <div className="flex items-center gap-12">
         {
           categories.map((category) => (
-            <p key={category.name} className="button-text_ text-xs text-black/55 font-bold">
+            <p
+              key={category.name}
+              className="flex-center_ button-text_ text-xs text-black/55 font-bold"
+            >
               {category.name}
             </p>
           ))
+        }
+
+        {
+          mounted && (
+            <button 
+              className="group p-1 cursor-pointer"
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            >
+              {
+                resolvedTheme === "dark" ? (
+                  <SunIcon className="w-5 h-5 text-black/55 group-hover:text-black/85
+                    scale-100 group-hover:scale-110 group-hover:rotate-135 transition-all
+                    duration-200 ease-in-out"/>
+                  ) : (
+                    <MoonIcon className="w-5 h-5 text-black/55 group-hover:text-black/85
+                      scale-100 group-hover:scale-110 group-hover:rotate-15 transition-all
+                      duration-200 ease-in-out"/>
+                  )
+              }
+            </button>
+          )
         }
       </div>
     </div>
