@@ -22,17 +22,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className="antialiased flex bg-gray-200 text-black/90 min-h-screen h-full tracking-wide"
-        suppressHydrationWarning
-      >
+    <html lang="en" suppressHydrationWarning>
+      <body>
         <Providers>
-          <div className="flex-7 flex flex-col h-full w-full">
-            <NavBar />
-            {children}
+          <div className="antialiased flex min-h-screen min-w-screen h-full w-ful
+            bg-gray-200 text-black/90 dark:bg-black/0 dark:text-white/90 tracking-wide">
+            <div className="flex-7 flex flex-col h-full w-full text-black/90
+              dark:text-white/90">
+              <NavBar />
+              {children}
+            </div>
+            <SideBar />
           </div>
-          <SideBar />
         </Providers>
       </body>
     </html>

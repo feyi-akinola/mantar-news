@@ -67,16 +67,7 @@ const SideBar = () => {
   return (
     <Squircle
       cornerRadius={25}
-      style={{
-        padding: "1rem",
-        margin: "1rem",
-        width: "100%",
-        backgroundColor: "white",
-        display: "flex",
-        flexDirection: "column",
-        flex: 3,
-        gap: "1rem",
-      }}
+      className="w-full flex flex-col flex-3 p-4 m-4 gap-4 bg-white dark:bg-gray-900"
     >
       <SearchBar />
 

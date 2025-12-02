@@ -32,13 +32,13 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="mx-4 mt-4 flex-between_ text-black">
+    <div className="mx-4 mt-4 flex-between_">
       <a href="/" className="flex items-center" >
         <h1 className="text-2xl font-expanded">
           Mantar
         </h1>
         <Image
-          src="/images/mantar.png"
+          src={resolvedTheme === "dark" ? "/images/mantar-light.png" : "/images/mantar.png"}
           alt="Mantar Logo"
           width={32}
           height={32}
@@ -52,9 +52,10 @@ const NavBar = () => {
           categories.map((category) => (
             <p
               key={category.name}
-              className="flex-center_ button-text_ text-xs text-black/55 font-bold"
+              className="flex-center_ gap-2 button-text_ text-xs font-bold text-black/70
+                dark:text-white/70"
             >
-              {category.name}
+              <span>{category.name}</span>
             </p>
           ))
         }
@@ -69,11 +70,11 @@ const NavBar = () => {
                 resolvedTheme === "dark" ? (
                   <SunIcon className="w-5 h-5 text-black/55 group-hover:text-black/85
                     scale-100 group-hover:scale-110 group-hover:rotate-135 transition-all
-                    duration-200 ease-in-out"/>
+                    duration-200 ease-in-out dark:text-white/55 dark:group-hover:text-white/85"/>
                   ) : (
                     <MoonIcon className="w-5 h-5 text-black/55 group-hover:text-black/85
                       scale-100 group-hover:scale-110 group-hover:rotate-15 transition-all
-                      duration-200 ease-in-out"/>
+                      duration-200 ease-in-out dark:text-white/55 dark:group-hover:text-white/85"/>
                   )
               }
             </button>

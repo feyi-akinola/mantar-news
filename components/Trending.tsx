@@ -37,7 +37,7 @@ const Trending = ({ items, isLoading, onItemChange  }: TrendingProps) => {
         <ViewAll />
       </div>
 
-      <div className="grid grid-cols-3 w-full gap-8 bg-white card_">
+      <div className="grid grid-cols-3 w-full gap-8 bg-white dark:bg-gray-900 card_ text-black/90 dark:text-white/90">
         {
           isLoading
             ? (
