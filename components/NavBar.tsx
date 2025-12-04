@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { BrainIcon, ComputerIcon, DollarSignIcon, HeartIcon, SunIcon, MoonIcon } from "lucide-react";
+import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   const [mounted, setMounted] = useState<boolean>(false);
@@ -32,8 +33,9 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="flex-between_">
-      <a href="/" className="flex items-center" >
+    <div className="sticky top-0 left-0 right-0 z-50 bg-white/75 p-4 flex-between_
+      dark:bg-gray-900/80 backdrop-blur-sm">
+      <a href="/" className="group flex items-center" >
         <h1 className="text-2xl font-expanded">
           Mantar
         </h1>
@@ -42,24 +44,29 @@ const NavBar = () => {
           alt="Mantar Logo"
           width={32}
           height={32}
-          className="ml-2"
+          className="ml-2 group-hover:scale-90 transition-all duration-300
+          group-hover:animate-pulse loop-infinite"
           quality={100}
         />
       </a>
 
-      <div className="flex items-center gap-12">
-        <div className="hidden lg:flex gap-12">
-          {
-            categories.map((category) => (
-              <p
-                key={category.name}
-                className="flex-center_ gap-2 button-text_ text-xs font-bold text-black/70
-                  dark:text-white/70"
-              >
-                <span>{category.name}</span>
-              </p>
-            ))
-          }
+      <div className="items-center hidden lg:flex gap-14">
+        {
+          categories.map((category) => (
+            <p
+              key={category.name}
+              className="flex-center_ gap-2 button-text_ text-xs font-bold text-black/70
+                dark:text-white/70"
+            >
+              <span>{category.name}</span>
+            </p>
+          ))
+        }
+      </div>
+
+      <div className="flex-gap_">
+        <div className="hidden lg:block">
+          <SearchBar />
         </div>
 
         {

@@ -31,9 +31,9 @@ export default function MainArticle({ item, isLoading }: MainArticleProps) {
     <Squircle
       cornerRadius={30}
       style={{ backgroundImage: bgImgStyle }}
-      className={`${bgColorStyle} ${bgImgStyle} gap-4 w-full min-h-90
-        p-8 bg-center bg-cover shrink-0 h-full flex flex-col justify-end
-        text-white sm:min-h-120 xl:min-h-150`}
+      className={`${bgColorStyle} ${bgImgStyle} gap-4 w-full h-90
+        p-8 bg-center bg-cover shrink-0 flex flex-col justify-end
+        text-white sm:h-120 xl:h-150`}
     >
       {
         isLoading

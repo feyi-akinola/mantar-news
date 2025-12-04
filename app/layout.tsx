@@ -25,18 +25,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <Providers>
-          <div className="antialiased flex flex-col gap-6 xl:flex-row min-h-screen min-w-screen
-            w-full lg:h-screen overflow-hidden bg-white text-black/90 p-6
-            dark:bg-black/0 dark:text-white/90 tracking-wide">
-            <div className="flex flex-7 flex-col w-full text-black/90
-              dark:text-white/90 gap-6">
-              <NavBar />
-              <div className="overflow-y-auto">
+          <div className="antialiased bg-white text-black/90 dark:bg-black/95
+            dark:text-white/90 tracking-wide min-h-screen
+            ">
+            <NavBar />
+            <div className=" flex flex-col gap-6 xl:flex-row w-full text-black/90
+              dark:text-white/90 p-6 overflow-hidden">
+              <div className=" flex flex-7 flex-col overflow-y-auto">
                 {children}
               </div>
-            </div>
 
-            <SideBar />
+              <SideBar />
+            </div>
           </div>
         </Providers>
       </body>

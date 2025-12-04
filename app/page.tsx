@@ -59,7 +59,7 @@ export default function Home() {
       loadTopNews();
   }, [hasFetchedTopNews]);
   return (
-    <div className="flex flex-col gap-16">
+    <div className="pr-0 xl:pr-2 flex flex-col gap-16">
       <MainArticle item={mainStory} isLoading={isLoading} />
 
       <Trending

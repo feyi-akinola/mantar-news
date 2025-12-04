@@ -1,11 +1,9 @@
 "use client";
 
 // Libraries
-import { Squircle } from "corner-smoothing";
 import axios, { AxiosResponse } from "axios";
 
 // Components
-import SearchBar from "@/components/SearchBar";
 import RecommendedArticle from "@/components/RecommendedArticle";
 import NewsMedium from "@/components/NewsMedium";
 import ViewAll from "@/components/ViewAll";
@@ -65,13 +63,9 @@ const SideBar = () => {
   }, []);
 
   return (
-    <Squircle
-      cornerRadius={25}
+    <div
       className="w-full flex flex-3 flex-col lg:shrink-0 gap-4"
     >
-      <div className="hidden lg:block">
-        <SearchBar />
-      </div>
 
       {/* Recommended */}
       <div className="flex-between_ mt-4">
@@ -81,7 +75,7 @@ const SideBar = () => {
 
       <NewsMedium />
 
-      <div className="flex-1 min-h-0 overflow-y-auto">
+      <div className="p-2 overflow-y-auto">
         {
           isLoading
             ? (
@@ -96,8 +90,7 @@ const SideBar = () => {
               )
         }
       </div>
-
-    </Squircle>
+    </div>
   );
 };
 

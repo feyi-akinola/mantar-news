@@ -6,7 +6,7 @@ const SearchBar = () => {
     <Squircle
       cornerRadius={25}
       className="bg-gray-200 dark:bg-gray-700 flex-center_ gap-2
-        px-6 py-3 text-black/30 dark:text-white/30
+        px-6 py-3 text-black/30 dark:text-white/30 w-80
         hover:bg-gray-300 dark:hover:bg-gray-600 transition-all
         duration-300"
     >
