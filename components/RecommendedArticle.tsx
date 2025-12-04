@@ -44,7 +44,7 @@ export default function RecommendedArticle({ item, isLast, isInSideBar=false }: 
 
           {
             item ? (
-              <h3 className="font-bold line-clamp-3">{item.title}</h3>
+              <h3 className="font-bold line-clamp-3 leading-tight">{item.title}</h3>
             ) : (
               <PulseFillerText lines={3} height={3.5} gap={2} />
             )

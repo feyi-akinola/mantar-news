@@ -42,39 +42,9 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
   return (
     <div className="flex-center_ flex-col">
       <div className="flex-between_ gap-4 mb-4 w-full">
-        <div className="flex flex-col w-full gap-4">
-          <div className="flex-between_ w-full gap-12">
-            {
-              item
-                ? <CategoryChip category={item.categories[0]} />
-                : <PulseFiller />
-            }
-
-            {
-              item ? (
-                <div className="flex-center_ gap-1">
-                  <p className="text-xs font-regular text-gray-400">
-                    {formatTime(item.published_at)}
-                  </p>
-                </div>
-              ) : (
-                <PulseFiller />
-              )
-            }
-          </div>
-
-          {
-            item ? (
-              <h3 className="font-bold line-clamp-3">{item.title}</h3>
-            ) : (
-              <PulseFillerText lines={3} height={3.5} gap={2} />
-            )
-          }
-        </div>
-
         {
           item && item.image_url ? (
-            <div className="w-30 h-30 shrink-0 rounded-xl bg-gray-200">
+            <div className="w-40 h-35 lg:w-55 shrink-0 rounded-xl bg-gray-200">
               <Image
                 src={item.image_url}
                 alt={item.title.slice(0, 10) + "..."}
@@ -84,9 +54,35 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
               />
             </div>
           ) : (
-            <div className="w-30 h-30 shrink-0 rounded-xl bg-gray-200 animate-pulse" />
+            <div className="w-40 h-35 lg:w-55 shrink-0 rounded-xl bg-gray-200 animate-pulse" />
           )
         }
+
+        <div className="flex flex-col w-full gap-4">
+          {
+            item
+              ? <CategoryChip category={item.categories[0]} />
+              : <PulseFiller />
+          }
+
+          {
+            item ? (
+              <h3 className="font-bold line-clamp-3 leading-tight">{item.title}</h3>
+            ) : (
+              <PulseFillerText lines={3} height={3.5} gap={2} />
+            )
+          }
+
+          {
+            item ? (
+              <p className="text-xs font-regular text-gray-400">
+                {formatTime(item.published_at)}
+              </p>
+            ) : (
+              <PulseFiller />
+            )
+          }
+        </div>
       </div>
 
       {/* Divider */}
