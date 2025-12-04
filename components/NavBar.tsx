@@ -32,7 +32,7 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="mx-4 mt-4 flex-between_">
+    <div className="flex-between_">
       <a href="/" className="flex items-center" >
         <h1 className="text-2xl font-expanded">
           Mantar
@@ -48,17 +48,19 @@ const NavBar = () => {
       </a>
 
       <div className="flex items-center gap-12">
-        {
-          categories.map((category) => (
-            <p
-              key={category.name}
-              className="flex-center_ gap-2 button-text_ text-xs font-bold text-black/70
-                dark:text-white/70"
-            >
-              <span>{category.name}</span>
-            </p>
-          ))
-        }
+        <div className="hidden lg:flex gap-12">
+          {
+            categories.map((category) => (
+              <p
+                key={category.name}
+                className="flex-center_ gap-2 button-text_ text-xs font-bold text-black/70
+                  dark:text-white/70"
+              >
+                <span>{category.name}</span>
+              </p>
+            ))
+          }
+        </div>
 
         {
           mounted && (

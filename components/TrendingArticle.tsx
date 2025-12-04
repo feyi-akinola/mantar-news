@@ -40,9 +40,9 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
   }, [isActive]);
 
   return (
-    <div className="flex-col-center_">
+    <div className="flex-center_ flex-col">
       <div className="flex-between_ gap-4 mb-4 w-full">
-        <div className="flex-col-start_ w-full gap-4">
+        <div className="flex flex-col w-full gap-4">
           <div className="flex-between_ w-full gap-12">
             {
               item

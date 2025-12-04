@@ -59,7 +59,7 @@ export default function Home() {
       loadTopNews();
   }, [hasFetchedTopNews]);
   return (
-    <div className="m-4 flex flex-col-start_ gap-16 overflow-y-auto">
+    <div className="flex flex-col gap-16">
       <MainArticle item={mainStory} isLoading={isLoading} />
 
       <Trending

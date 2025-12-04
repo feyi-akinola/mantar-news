@@ -19,9 +19,9 @@ interface RecommendedArticleProps {
 
 export default function RecommendedArticle({ item, isLast, isInSideBar=false }: RecommendedArticleProps) {
   return (
-    <div className="flex-col-center_">
-      <div className="flex-between_ gap-4 mb-4 w-full">
-        <div className="flex-col-start_ w-full gap-4">
+    <div className="flex-center_flex-col">
+      <div className="flex-center_ flex-col md:flex-row gap-4 mb-4 w-full">
+        <div className="flex flex-col w-full gap-4">
           <div className="flex-between_ w-full gap-12">
             {
               item
@@ -53,12 +53,12 @@ export default function RecommendedArticle({ item, isLast, isInSideBar=false }: 
 
         {
           item && item.image_url ? (
-            <div className="w-30 h-30 shrink-0 rounded-xl bg-gray-200">
+            <div className="h-60 w-full md:h-30 md:w-30 shrink-0 rounded-xl bg-gray-200">
               <Image
                 src={item.image_url}
                 alt={item.title.slice(0, 10) + "..."}
-                width={120}
-                height={120}
+                width={100}
+                height={100}
                 className="w-full h-full object-cover rounded-xl bg-gray-100"
               />
             </div>

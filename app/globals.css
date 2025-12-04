@@ -107,27 +107,23 @@ body {
 
 
 @layer utilities {
+  .flex-gap_ {
+    @apply flex gap-4;
+  }
+
   .flex-center_ {
     @apply flex items-center justify-center;
   }
   .flex-between_ {
     @apply flex items-center justify-between;
   }
-  .flex-gap_ {
-    @apply flex gap-4;
-  }
   .flex-end_ {
     @apply flex items-end justify-end;
   }
-  .flex-col-center_ {
-    @apply flex flex-col items-center justify-center;
+  .flex-start_ {
+    @apply flex items-start justify-start;
   }
-  .flex-col-start_ {
-    @apply flex flex-col items-start justify-center;
-  }
-  .flex-col-end_ {
-    @apply flex flex-col justify-end;
-  }
+
   .card_ {
     @apply rounded-xl p-4;
   }

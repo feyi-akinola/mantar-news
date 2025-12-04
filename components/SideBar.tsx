@@ -67,9 +67,11 @@ const SideBar = () => {
   return (
     <Squircle
       cornerRadius={25}
-      className="w-full flex flex-col flex-3 p-4 m-4 gap-4 bg-white dark:bg-gray-900"
+      className="w-full flex flex-3 flex-col lg:shrink-0 gap-4"
     >
-      <SearchBar />
+      <div className="hidden lg:block">
+        <SearchBar />
+      </div>
 
       {/* Recommended */}
       <div className="flex-between_ mt-4">
@@ -79,7 +81,7 @@ const SideBar = () => {
 
       <NewsMedium />
 
-      <div className="p-2 overflow-y-auto">
+      <div className="flex-1 min-h-0 overflow-y-auto">
         {
           isLoading
             ? (
