@@ -5,7 +5,6 @@ import axios, { AxiosResponse } from "axios";
 
 // Components
 import RecommendedArticle from "@/components/RecommendedArticle";
-import NewsMedium from "@/components/NewsMedium";
 import ViewAll from "@/components/ViewAll";
 
 // Hooks
@@ -68,14 +67,13 @@ const SideBar = () => {
     >
 
       {/* Recommended */}
-      <div className="flex-between_ mt-4">
+      <div className="flex-between_">
         <h2 className="text-xl font-bold">Recommended</h2>
         <ViewAll />
       </div>
 
-      <NewsMedium />
-
-      <div className="p-2 overflow-y-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+        xl:grid-cols-1 gap-y-12 gap-x-4  overflow-y-auto">
         {
           isLoading
             ? (

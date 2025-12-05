@@ -28,14 +28,16 @@ export default function RootLayout({
           <div className="antialiased bg-white text-black/90 dark:bg-black/95
             dark:text-white/90 tracking-wide min-h-screen
             ">
-            <NavBar />
-            <div className=" flex flex-col gap-6 xl:flex-row w-full text-black/90
-              dark:text-white/90 p-6 overflow-hidden">
-              <div className=" flex flex-7 flex-col overflow-y-auto">
-                {children}
-              </div>
+            <div className="max-w-[2000px] mx-auto">
+              <NavBar />
+              <div className="flex flex-col gap-6 xl:flex-row w-full text-black/90
+                dark:text-white/90 p-6 overflow-hidden">
+                <div className=" flex flex-7 flex-col overflow-y-auto">
+                  {children}
+                </div>
 
-              <SideBar />
+                <SideBar />
+              </div>
             </div>
           </div>
         </Providers>
