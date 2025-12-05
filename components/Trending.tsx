@@ -31,15 +31,14 @@ const Trending = ({ items, isLoading, onItemChange  }: TrendingProps) => {
 
 
   return (
-    <div className="gap-4 w-full">
+    <div className="flex flex-col gap-4 w-full">
       <div className="flex-between_ w-full">
         <h1 className="text-xl font-bold">Trending</h1>
         <ViewAll />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full
-         gap-8 bg-white dark:bg-gray-900 card_ text-black/90
-         dark:text-white/90">
+         gap-8 text-black/90 dark:text-white/90">
         {
           isLoading
             ? (

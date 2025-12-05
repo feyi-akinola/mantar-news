@@ -11,7 +11,9 @@ interface PulseFillerTextProps {
 
 export const PulseFiller = ({ color }: PulseFillerProps) => {
   return (
-    <div className={`h-3.5 w-16 animate-pulse rounded-sm ${color ? `bg-${color}` : "bg-gray-200"}`}>
+    <div className={`h-3.5 w-16 animate-pulse rounded-sm
+      ${color ? `bg-${color}` : "bg-gray-200"}
+      dark:bg-gray-600`}>
     </div>
   );
 };
@@ -25,7 +27,9 @@ export const PulseFillerText = ({ lines, height, gap=2, color }: PulseFillerText
           <div
             key={index}
             style={{ height: `${height * 4}px` }}
-            className={`w-full animate-pulse rounded-sm ${color ? `bg-${color}` : "bg-gray-200"}`}
+            className={`w-full animate-pulse rounded-sm
+              ${color ? `bg-${color}` : "bg-gray-200"}
+              dark:bg-gray-600`}
           />
         ))
       }

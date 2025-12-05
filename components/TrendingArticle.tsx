@@ -1,5 +1,6 @@
 // Libraries
 import Image from "next/image";
+import { ImageIcon } from "lucide-react";
 
 // Hooks
 import { useState, useEffect } from "react";
@@ -23,6 +24,7 @@ interface TrendingArticleProps {
 
 export default function TrendingArticle({ item, isLast, isActive, onProgressComplete }: TrendingArticleProps) {
   const [progress, setProgress] = useState<number>(0);
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isActive) {
@@ -39,24 +41,35 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
     return () => clearTimeout(timer);
   }, [isActive]);
 
+  useEffect(() => {
+    // reset when the article image changes
+    setImageLoaded(false);
+  }, [item?.image_url]);
+
   return (
     <div className="flex-center_ flex-col">
       <div className="flex-between_ gap-4 mb-4 w-full">
-        {
-          item && item.image_url ? (
-            <div className="w-40 h-35 lg:w-55 shrink-0 rounded-xl bg-gray-200">
+        <div className="relative w-40 h-35 lg:w-55 shrink-0 rounded-xl overflow-hidden">
+          {
+            (!imageLoaded || !(item && item.image_url)) && (
+              <div className="absolute inset-0 rounded-xl bg-gray-200 dark:bg-gray-600 animate-pulse flex-center_">
+                <ImageIcon className="w-10 h-10 text-gray-300 dark:text-gray-500" />
+              </div>
+            )
+          }
+          {
+            (item && item.image_url) && (
               <Image
                 src={item.image_url}
                 alt={item.title.slice(0, 10) + "..."}
                 width={120}
                 height={120}
                 className="w-full h-full object-cover rounded-xl bg-gray-100"
+                onLoadingComplete={() => setImageLoaded(true)}
               />
-            </div>
-          ) : (
-            <div className="w-40 h-35 lg:w-55 shrink-0 rounded-xl bg-gray-200 animate-pulse" />
-          )
-        }
+            )
+          }
+        </div>
 
         <div className="flex flex-col w-full gap-4">
           {
@@ -93,7 +106,7 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
       } */}
 
       {/* Progress Bar */}
-      <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden mt-2">
+      <div className="w-full h-1 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden mt-2">
         <div
           className="h-full bg-blue-500 transition-all duration-10000 ease-linear"
           style={{ width: `${progress}%` }}
