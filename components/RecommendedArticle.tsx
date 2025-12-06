@@ -29,7 +29,7 @@ export default function RecommendedArticle({ item, isLast }: RecommendedArticleP
   }, [item?.image_url]);
 
   return (
-    <div className="flex-center_ flex-col gap-4">
+    <div className="flex-center_ flex-col gap-2">
       { /* Category and Time */}
       <div className="flex-between_ w-full gap-12">
         {

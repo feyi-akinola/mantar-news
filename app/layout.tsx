@@ -30,8 +30,8 @@ export default function RootLayout({
             ">
             <div className="max-w-[2000px] mx-auto">
               <NavBar />
-              <div className="flex flex-col gap-6 xl:flex-row w-full text-black/90
-                dark:text-white/90 p-6 overflow-hidden">
+              <div className="flex flex-col gap-14 xl:flex-row w-full text-black/90
+                dark:text-white/90 p-6 overflow-hidden xl:gap-6">
                 <div className=" flex flex-7 flex-col overflow-y-auto">
                   {children}
                 </div>

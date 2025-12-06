@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { NewsArticle } from "@/types/newsArticle";
 
 // Constants
-import { TOP_NEWS_URL } from "@/constants";
+import { CLIENT_TOP_NEWS_URL } from "@/app/api/constants";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -29,12 +29,12 @@ export default function Home() {
   }, [topNews]);
 
   const fetchTopNews = async () => {
-    const response: AxiosResponse = await axios.get(TOP_NEWS_URL);
-    const data = await response.data.data ?? [];
+    const response: AxiosResponse = await axios.get(CLIENT_TOP_NEWS_URL);
+    const data = await response.data ?? [];
     const status = response.status;
 
     if (status === 200) {
-      setTopNews(data);
+      setTopNews(data as NewsArticle[]);
       setHasFetchedTopNews(true);
 
       return data;
@@ -56,7 +56,7 @@ export default function Home() {
       }
     };
     
-      loadTopNews();
+    loadTopNews();
   }, [hasFetchedTopNews]);
   return (
     <div className="pr-0 xl:pr-2 flex flex-col gap-16">

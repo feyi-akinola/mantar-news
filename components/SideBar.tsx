@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { NewsArticle } from "@/types/newsArticle";
 
 // Constants
-import { TRENDING_NEWS_URL } from "@/constants";
+import { CLIENT_TRENDING_NEWS_URL } from "@/app/api/constants";
 
 const SideBar = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -38,8 +38,8 @@ const SideBar = () => {
   };
 
   const fetchTrending = async () => {
-    const response: AxiosResponse = await axios.get(TRENDING_NEWS_URL);
-    const data = await response.data.articles ?? [];
+    const response: AxiosResponse = await axios.get(CLIENT_TRENDING_NEWS_URL);
+    const data = await response.data ?? [];
     const status = response.status;
 
     if (status === 200) {
@@ -73,7 +73,7 @@ const SideBar = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
-        xl:grid-cols-1 gap-y-12 gap-x-4  overflow-y-auto">
+        xl:grid-cols-1 gap-y-8 gap-x-4 items-start overflow-y-auto">
         {
           isLoading
             ? (

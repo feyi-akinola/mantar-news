@@ -2,10 +2,6 @@
 
 // Libraries
 import { Squircle } from "corner-smoothing";
-import axios, { AxiosResponse } from "axios";
-
-// Hooks
-import { useEffect, useState } from "react";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
@@ -28,18 +24,20 @@ export default function MainArticle({ item, isLoading }: MainArticleProps) {
     : undefined;
 
   return (
-    <Squircle
-      cornerRadius={30}
-      style={{ backgroundImage: bgImgStyle }}
-      className={`${bgColorStyle} ${bgImgStyle} gap-4 w-full h-90
-        p-8 bg-center bg-cover shrink-0 flex flex-col justify-end
-        text-white sm:h-120 xl:h-150`}
-    >
-      {
-        isLoading
-          ? <PulseFiller color="white"/>
-          : <CategoryChip category={item?.categories[0] ?? ""} />
-      }
+    <div className="flex flex-col gap-4">
+      <Squircle
+        cornerRadius={30}
+        style={{ backgroundImage: bgImgStyle }}
+        className={`${bgColorStyle} ${bgImgStyle} gap-4 w-full h-80
+          p-8 bg-center bg-cover shrink-0 flex flex-col justify-end
+          text-white sm:h-110 xl:h-130`}
+      >
+        {
+          isLoading
+            ? <PulseFiller color="white"/>
+            : <CategoryChip category={item?.categories[0] ?? ""} />
+        }
+      </Squircle>
 
       {
         isLoading
@@ -48,6 +46,6 @@ export default function MainArticle({ item, isLoading }: MainArticleProps) {
               {item?.title}
             </h1>
       }
-    </Squircle>
+    </div>
   );
 };
