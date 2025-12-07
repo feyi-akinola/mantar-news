@@ -47,8 +47,17 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
   }, [item?.image_url]);
 
   return (
-    <div className="flex-center_ flex-col">
-      <div className="flex-between_ gap-4 mb-4 w-full">
+    <div className="flex-center_ flex-col gap-2">
+      {/* Progress Bar */}
+      <div className="w-full h-1 bg-gray-200 dark:bg-gray-600 rounded-full
+        overflow-hidden">
+        <div
+          className="h-full bg-blue-500 transition-all duration-10000
+            ease-linear"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+      <div className="flex-between_ gap-4 w-full">
         <div className="relative w-40 h-35 lg:w-55 shrink-0 rounded-xl overflow-hidden">
           {
             (!imageLoaded || !(item && item.image_url)) && (
@@ -105,13 +114,6 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
         )
       } */}
 
-      {/* Progress Bar */}
-      <div className="w-full h-1 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden mt-2">
-        <div
-          className="h-full bg-blue-500 transition-all duration-10000 ease-linear"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
     </div>
   );
 };

@@ -24,28 +24,29 @@ export default function MainArticle({ item, isLoading }: MainArticleProps) {
     : undefined;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex-7">
       <Squircle
         cornerRadius={30}
         style={{ backgroundImage: bgImgStyle }}
-        className={`${bgColorStyle} ${bgImgStyle} gap-4 w-full h-80
+        className={`${bgColorStyle} ${bgImgStyle} gap-4 w-full h-90
           p-8 bg-center bg-cover shrink-0 flex flex-col justify-end
-          text-white sm:h-110 xl:h-130`}
+          text-white sm:h-120 lg:h-full`}
       >
         {
           isLoading
             ? <PulseFiller color="white"/>
             : <CategoryChip category={item?.categories[0] ?? ""} />
         }
+
+        {
+          isLoading
+            ? <PulseFillerText color="white" lines={2} height={8} gap={4}/>
+            : <h1 className="text-xl sm:text-3xl font-semibold">
+                {item?.title}
+              </h1>
+        }
       </Squircle>
 
-      {
-        isLoading
-          ? <PulseFillerText color="white" lines={2} height={8} gap={4}/>
-          : <h1 className="text-xl sm:text-3xl font-semibold">
-              {item?.title}
-            </h1>
-      }
     </div>
   );
 };

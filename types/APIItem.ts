@@ -30,3 +30,20 @@ export type GNewsAPIItem = {
     url: string;
   };
 }
+
+export type NewsDataIOAPIItem = {
+  article_id: string;
+  title: string;
+  description: string;
+  content: string;
+  image: string;
+  link: string;
+  category: string[];
+  language: string;
+  country: string;
+  pub_date: string;
+  source_name: string;
+  source_icon: string;
+  source_url: string;
+  image_url: string;
+}

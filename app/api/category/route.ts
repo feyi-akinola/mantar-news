@@ -5,24 +5,27 @@ import { NextResponse } from "next/server";
 // Constants
 import { urls } from "@/app/api/routes";
 
-export async function GET() {
-  const url = `${urls.GNewsAPI}/top-headlines`;
-  const apiKey = process.env.NEXT_PUBLIC_GNEWS_API_KEY;
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const category = searchParams.get("category");
+  
+  const url = `${urls.newsDataIO}/latest`;
+  const apiKey = process.env.NEXT_PUBLIC_NEWSDATAIO_API_KEY;
 
   try {
     const response: AxiosResponse = await axios.get(url, {
       params: {
         apikey: apiKey,
-        category: "general",
-        lang: "en",
+        category: category,
+        language: "en",
         country: "us",
-        max: 3,
+        size: 2,
       },
     });
     const status = response.status;
     
     if (status === 200 && response.data) {
-      const data = await response.data.articles ?? [];
+      const data = await response.data.results ?? [];
 
       return NextResponse.json(data, { status: 200 });
     } else {

@@ -6,31 +6,35 @@ import { NextResponse } from "next/server";
 import { urls } from "@/app/api/routes";
 
 export async function GET() {
-  const url = `${urls.GNewsAPI}/top-headlines`;
-  const apiKey = process.env.NEXT_PUBLIC_GNEWS_API_KEY;
+  const url = `${urls.newsDataIO}/latest`;
+  const apiKey = process.env.NEXT_PUBLIC_NEWSDATAIO_API_KEY;
+
+  console.log(`[DEBUG]: ${url}`);
+  console.log(`[DEBUG]: ${apiKey}`);
 
   try {
     const response: AxiosResponse = await axios.get(url, {
       params: {
         apikey: apiKey,
-        category: "general",
-        lang: "en",
+        language: "en",
+        q: "breaking",
         country: "us",
-        max: 3,
+        size: 3,
       },
     });
+    
     const status = response.status;
     
     if (status === 200 && response.data) {
-      const data = await response.data.articles ?? [];
+      const data = await response.data.results ?? [];
 
       return NextResponse.json(data, { status: 200 });
     } else {
-      return NextResponse.json({ error: "Failed to fetch trending news" }, { status: 500 });
+      return NextResponse.json({ error: response.statusText }, { status: 500 });
     }
   } catch (error) {
     console.error(error);
 
-    return NextResponse.json({ error: "Failed to fetch trending news" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch latest news" }, { status: 500 });
   }
 } 

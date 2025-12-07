@@ -3,11 +3,11 @@ import axios, { AxiosResponse } from "axios";
 import { NextResponse } from "next/server";
 
 // Constants
-import { TOP_NEWS_URL } from "@/app/api/constants";
+import { urls } from "@/app/api/routes";
 
 export async function GET() {
   try {
-    const response: AxiosResponse = await axios.get(TOP_NEWS_URL);
+    const response: AxiosResponse = await axios.get(`${urls.theNewsAPI}/top`);
     const status = response.status;
     
     if (status === 200 && response.data) {

@@ -18,9 +18,10 @@ import { formatTime } from "@/utils/time";
 interface RecommendedArticleProps {
   item?: NewsArticle;
   isLast?: boolean;
+  hasTag?: boolean;
 }
 
-export default function RecommendedArticle({ item, isLast }: RecommendedArticleProps) {
+export default function RecommendedArticle({ item, isLast, hasTag }: RecommendedArticleProps) {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -31,31 +32,35 @@ export default function RecommendedArticle({ item, isLast }: RecommendedArticleP
   return (
     <div className="flex-center_ flex-col gap-2">
       { /* Category and Time */}
-      <div className="flex-between_ w-full gap-12">
-        {
-          item
-          ? <CategoryChip category={item.categories[0]} />
-          : <PulseFiller />
-        }
+      {
+        hasTag && (
+          <div className="flex-between_ w-full gap-12">
+            {
+              item
+              ? <CategoryChip category={item.categories[0]} />
+              : <PulseFiller />
+            }
 
-        {
-          item ? (
-            <div className="flex-center_ gap-1">
-              <p className="text-xs font-regular text-gray-400">
-                {formatTime(item.published_at)}
-              </p>
-            </div>
-          ) : (
-            <PulseFiller />
-          )
-        }
-      </div>
+            {
+              item ? (
+                <div className="flex-center_ gap-1">
+                  <p className="text-xs font-regular text-gray-400">
+                    {formatTime(item.published_at)}
+                  </p>
+                </div>
+              ) : (
+                <PulseFiller />
+              )
+            }
+          </div>
+        )
+      }
 
       { /* Image */}
       <div className="relative h-50 sm:h-40 lg:h-50 w-full shrink-0 rounded-xl overflow-hidden">
         {
           (!imageLoaded || !(item && item.image_url)) && (
-            <div className="absolute inset-0 rounded-xl bg-gray-200 dark:bg-gray-600 animate-pulse flex-center_">
+            <div className="absolute inset-0 rounded-3xl bg-gray-200 dark:bg-gray-600 animate-pulse flex-center_">
               <ImageIcon className="w-14 h-14 text-gray-300 dark:text-gray-500" />
             </div>
           )
@@ -67,7 +72,7 @@ export default function RecommendedArticle({ item, isLast }: RecommendedArticleP
               alt={item.title.slice(0, 10) + "..."}
               width={100}
               height={100}
-              className="w-full h-full object-cover rounded-xl bg-gray-100"
+              className="w-full h-full object-cover rounded-2xl bg-gray-100"
               onLoadingComplete={() => setImageLoaded(true)}
             />
           )

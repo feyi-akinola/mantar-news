@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { NewsArticle } from "@/types/newsArticle";
 
 // Constants
-import { CLIENT_TRENDING_NEWS_URL } from "@/app/api/constants";
+import { routes } from "@/app/api/routes";
 
 const SideBar = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -38,7 +38,7 @@ const SideBar = () => {
   };
 
   const fetchTrending = async () => {
-    const response: AxiosResponse = await axios.get(CLIENT_TRENDING_NEWS_URL);
+    const response: AxiosResponse = await axios.get(routes.trending);
     const data = await response.data ?? [];
     const status = response.status;
 
