@@ -63,7 +63,10 @@ const Categories = ({ title }: CategoryProps) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex-between_">
-        <h1 className="text-xl font-bold">{title}</h1>
+        <div>
+          <div className="mb-0.5 h-1.5 w-full bg-red-500"/>
+          <h1 className="text-xl font-bold">{title}</h1>
+        </div>
         <ViewAll />
       </div>
 

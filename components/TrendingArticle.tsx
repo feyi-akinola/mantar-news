@@ -58,7 +58,7 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
           <div className="w-full h-1 bg-gray_ rounded-full
             overflow-hidden">
             <div
-              className="h-full bg-blue-500 transition-all duration-10000
+              className="h-full bg-red-500 transition-all duration-10000
                 ease-linear"
               style={{ width: `${progress}%` }}
             />

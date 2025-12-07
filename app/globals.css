@@ -134,10 +134,10 @@ body {
     @apply relative transition-all duration-300 cursor-pointer;
   }
   .button-text_:hover {
-    @apply text-blue-500;
+    @apply text-red-500;
   }
   .button-text_::after {
-    @apply absolute h-0.5 w-full bg-blue-500 -bottom-1 left-0 content-[''] scale-x-0
+    @apply absolute h-0.5 w-full bg-red-500 -bottom-1 left-0 content-[''] scale-x-0
       origin-bottom-right transition-transform duration-300;
   }
   .button-text_:hover::after {

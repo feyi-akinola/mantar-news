@@ -17,7 +17,7 @@ const ArticlePage = async ({ params }: { params: { id: string } }) => {
 
       <div className="flex-between_">
         {/* <CategoryChip category="Technology" /> */}
-        <p className="text-xs font-bold text-blue-500">Technology</p>
+        <p className="text-xs font-bold text-red-500">Technology</p>
         <p className="text-xs text-gray-500 text-right">
           12, November 2025
         </p>
