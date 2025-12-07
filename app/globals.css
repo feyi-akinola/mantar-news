@@ -143,4 +143,32 @@ body {
   .button-text_:hover::after {
     @apply scale-x-100 origin-bottom-left;
   }
+
+  .text-gray_ {
+    @apply text-gray-300 dark:text-gray-700;
+  }
+
+  .bg-gray_ {
+    @apply bg-gray-200 dark:bg-gray-600;
+  }
+
+  .error-bg_ {
+    @apply bg-red-100 dark:bg-red-800/20;
+  }
+
+  .error-accent_ {
+    @apply bg-red-300 dark:bg-red-700;
+  }
+
+  .error-text-accent_ {
+    @apply text-red-300 dark:text-red-900;
+  }
+
+  .loading-bg_ {
+    @apply bg-gray-200 dark:bg-gray-600 animate-pulse;
+  }
+
+  .loading-accent_ {
+    @apply text-gray-300 dark:text-gray-500;
+  }
 }

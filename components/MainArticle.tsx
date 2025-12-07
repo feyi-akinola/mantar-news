@@ -1,7 +1,3 @@
-"use client";
-
-// Libraries
-import { Squircle } from "corner-smoothing";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
@@ -9,28 +5,27 @@ import { NewsArticle } from "@/types/newsArticle";
 // Components
 import CategoryChip from "@/components/CategoryChip";
 import { PulseFiller, PulseFillerText } from "./PulseFiller";
+import ImagePlaceholder from "./ImagePlaceholder";
 
 interface MainArticleProps {
   item: NewsArticle | null;
   isLoading: boolean;
+  hasError: boolean;
 }
 
-export default function MainArticle({ item, isLoading }: MainArticleProps) {
+export default function MainArticle({ item, isLoading, hasError }: MainArticleProps) {
   const bgImgStyle = isLoading
     ? undefined
     : `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6) 20%, rgba(0,0,0,0) 60%), url(${item?.image_url})`;
-  const bgColorStyle = isLoading
-    ? "bg-black/10 animate-pulse"
-    : undefined;
+  const bgColorStyle = isLoading ? "loading-bg_" : hasError ? "error-bg_" : "bg-gray_";
 
   return (
     <div className="flex-7">
-      <Squircle
-        cornerRadius={30}
-        style={{ backgroundImage: bgImgStyle }}
-        className={`${bgColorStyle} ${bgImgStyle} gap-4 w-full h-90
+      <div
+        style={{ backgroundImage: isLoading || hasError ? undefined : bgImgStyle }}
+        className={`relative ${bgColorStyle} gap-4 w-full h-90
           p-8 bg-center bg-cover shrink-0 flex flex-col justify-end
-          text-white sm:h-120 lg:h-full`}
+          text-white sm:h-120 lg:h-full rounded-4xl`}
       >
         {
           isLoading
@@ -45,7 +40,14 @@ export default function MainArticle({ item, isLoading }: MainArticleProps) {
                 {item?.title}
               </h1>
         }
-      </Squircle>
+
+        <ImagePlaceholder
+          isLoading={isLoading}
+          hasError={hasError}
+          width={14}
+          height={14}
+        />
+      </div>
 
     </div>
   );

@@ -26,6 +26,7 @@ import { transformNewsDataIOArticles } from "@/utils/data";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
   const [hasFetchedLatestNews, setHasFetchedLatestNews] = useState(false);
   const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
   const [mainStory, setMainStory] = useState<NewsArticle | null>(null);
@@ -55,6 +56,7 @@ export default function Home() {
           await fetchLatestNews();
         } catch (error) {
           console.error(error);
+          setHasError(true);
         } finally {
           setIsLoading(false);
         }
@@ -76,7 +78,7 @@ export default function Home() {
       setLatestNews(transformNewsDataIOArticles(data));
       setHasFetchedLatestNews(true);
     } else {
-      throw new Error("Failed to fetch latest news");
+      setHasError(true);
     }
   };
 
@@ -90,11 +92,12 @@ export default function Home() {
         <div className="flex flex-col gap-14 w-full p-6 xl:gap-24">
           <div className="flex flex-col gap-32">
             <div className="flex flex-col lg:flex-row gap-16 lg:gap-12">
-              <MainArticle item={mainStory} isLoading={isLoading} />
+              <MainArticle item={mainStory} isLoading={isLoading} hasError={hasError} />
 
               <Trending
                 items={latestNews}
                 isLoading={isLoading}
+                hasError={hasError}
                 onItemChange={(item) => setMainStory(item)}
               />
             </div>

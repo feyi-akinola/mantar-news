@@ -1,14 +1,8 @@
-"use client";
-
-// Libraries
-import axios, { AxiosResponse } from "axios";
-
 // Components
 import TrendingArticle from "./TrendingArticle";
-import ViewAll from "@/components/ViewAll";
 
 // Hooks
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
@@ -16,10 +10,11 @@ import { NewsArticle } from "@/types/newsArticle";
 interface TrendingProps {
   items: NewsArticle[];
   isLoading: boolean;
+  hasError: boolean;
   onItemChange: (item: NewsArticle) => void;
 }
 
-const Trending = ({ items, isLoading, onItemChange  }: TrendingProps) => {
+const Trending = ({ items, isLoading, hasError, onItemChange  }: TrendingProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // When progress completes for one item:
@@ -37,23 +32,17 @@ const Trending = ({ items, isLoading, onItemChange  }: TrendingProps) => {
       <div className="flex flex-col w-full
          gap-8 text-black/90 dark:text-white/90">
         {
-          isLoading
-            ? (
-                Array.from({ length: 3 }).map((_, index) => (
-                  <TrendingArticle key={index} />
-                ))
-              )
-            : (
-                items.map((item, index) => (
-                  <TrendingArticle
-                    key={item.uuid}
-                    item={item}
-                    isLast={index === items.length - 1}
-                    isActive={activeIndex === index}
-                    onProgressComplete={handleProgressComplete}
-                  />
-                ))
-              )
+          Array.from({ length: 3 }).map((item, index) => (
+            <TrendingArticle
+              key={index}
+              item={items.length > 0 ? items[index] : undefined}
+              isLast={index === items.length - 1}
+              isActive={activeIndex === index}
+              onProgressComplete={handleProgressComplete}
+              isLoading={isLoading}
+              hasError={hasError}
+            />
+          ))
         }
       </div>
     </div>

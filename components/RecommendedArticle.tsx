@@ -1,6 +1,5 @@
 // Libraries
 import Image from "next/image";
-import { ImageIcon } from "lucide-react";
 
 // Hooks
 import { useState, useEffect } from "react";
@@ -8,6 +7,7 @@ import { useState, useEffect } from "react";
 // Components
 import CategoryChip from "@/components/CategoryChip";
 import { PulseFiller, PulseFillerText } from "@/components/PulseFiller";
+import ImagePlaceholder from "./ImagePlaceholder";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
@@ -19,9 +19,11 @@ interface RecommendedArticleProps {
   item?: NewsArticle;
   isLast?: boolean;
   hasTag?: boolean;
+  isLoading: boolean;
+  hasError: boolean;
 }
 
-export default function RecommendedArticle({ item, isLast, hasTag }: RecommendedArticleProps) {
+export default function RecommendedArticle({ item, isLast, hasTag, isLoading, hasError }: RecommendedArticleProps) {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function RecommendedArticle({ item, isLast, hasTag }: Recommended
             {
               item
               ? <CategoryChip category={item.categories[0]} />
-              : <PulseFiller />
+              : <PulseFiller isLoading={isLoading} hasError={hasError} />
             }
 
             {
@@ -49,7 +51,7 @@ export default function RecommendedArticle({ item, isLast, hasTag }: Recommended
                   </p>
                 </div>
               ) : (
-                <PulseFiller />
+                <PulseFiller isLoading={isLoading} hasError={hasError} />
               )
             }
           </div>
@@ -60,8 +62,15 @@ export default function RecommendedArticle({ item, isLast, hasTag }: Recommended
       <div className="relative h-50 sm:h-40 lg:h-50 w-full shrink-0 rounded-xl overflow-hidden">
         {
           (!imageLoaded || !(item && item.image_url)) && (
-            <div className="absolute inset-0 rounded-3xl bg-gray-200 dark:bg-gray-600 animate-pulse flex-center_">
-              <ImageIcon className="w-14 h-14 text-gray-300 dark:text-gray-500" />
+            <div
+              className={`absolute inset-0 rounded-3xl flex-center_
+              ${isLoading ? 'loading-bg_ animate-pulse' : hasError ? 'error-bg_' : ''} `}>
+              <ImagePlaceholder
+                isLoading={isLoading}
+                hasError={hasError}
+                width={10}
+                height={10}
+              />
             </div>
           )
         }
@@ -87,7 +96,12 @@ export default function RecommendedArticle({ item, isLast, hasTag }: Recommended
               {item.title}
             </h3>
           ) : (
-            <PulseFillerText lines={3} height={3.5} gap={2} />
+            <PulseFillerText 
+              lines={3} 
+              height={3.5} 
+              gap={2} 
+              isLoading={isLoading} 
+              hasError={hasError} />
           )
         }
       </div>

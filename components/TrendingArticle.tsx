@@ -1,6 +1,5 @@
 // Libraries
 import Image from "next/image";
-import { ImageIcon } from "lucide-react";
 
 // Hooks
 import { useState, useEffect } from "react";
@@ -8,6 +7,7 @@ import { useState, useEffect } from "react";
 // Components
 import CategoryChip from "@/components/CategoryChip";
 import { PulseFiller, PulseFillerText } from "@/components/PulseFiller";
+import ImagePlaceholder from "./ImagePlaceholder";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
@@ -19,14 +19,18 @@ interface TrendingArticleProps {
   item?: NewsArticle;
   isLast?: boolean;
   isActive?: boolean;
+  isLoading: boolean;
+  hasError: boolean;
   onProgressComplete?: () => void;
 }
 
-export default function TrendingArticle({ item, isLast, isActive, onProgressComplete }: TrendingArticleProps) {
+export default function TrendingArticle({ item, isLast, isActive, onProgressComplete, isLoading, hasError }: TrendingArticleProps) {
   const [progress, setProgress] = useState<number>(0);
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   useEffect(() => {
+    if (isLoading || hasError) return;
+
     if (!isActive) {
       setProgress(0);
       return;
@@ -49,20 +53,31 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
   return (
     <div className="flex-center_ flex-col gap-2">
       {/* Progress Bar */}
-      <div className="w-full h-1 bg-gray-200 dark:bg-gray-600 rounded-full
-        overflow-hidden">
-        <div
-          className="h-full bg-blue-500 transition-all duration-10000
-            ease-linear"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
+      {
+        !isLoading && !hasError && (
+          <div className="w-full h-1 bg-gray_ rounded-full
+            overflow-hidden">
+            <div
+              className="h-full bg-blue-500 transition-all duration-10000
+                ease-linear"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        )
+      }
+
       <div className="flex-between_ gap-4 w-full">
         <div className="relative w-40 h-35 lg:w-55 shrink-0 rounded-xl overflow-hidden">
           {
             (!imageLoaded || !(item && item.image_url)) && (
-              <div className="absolute inset-0 rounded-xl bg-gray-200 dark:bg-gray-600 animate-pulse flex-center_">
-                <ImageIcon className="w-10 h-10 text-gray-300 dark:text-gray-500" />
+              <div className={`absolute inset-0 rounded-xl flex-center_
+                ${isLoading ? 'loading-bg_' : hasError ? 'error-bg_' : 'bg-gray_'} `}>
+                <ImagePlaceholder
+                  isLoading={isLoading}
+                  hasError={hasError}
+                  width={10}
+                  height={10}
+                />
               </div>
             )
           }
@@ -84,14 +99,19 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
           {
             item
               ? <CategoryChip category={item.categories[0]} />
-              : <PulseFiller />
+              : <PulseFiller isLoading={isLoading} hasError={hasError} />
           }
 
           {
             item ? (
               <h3 className="font-bold line-clamp-3 leading-tight">{item.title}</h3>
             ) : (
-              <PulseFillerText lines={3} height={3.5} gap={2} />
+              <PulseFillerText
+                lines={3}
+                height={3.5}
+                gap={2}
+                isLoading={isLoading}
+                hasError={hasError} />
             )
           }
 
@@ -101,7 +121,7 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
                 {formatTime(item.published_at)}
               </p>
             ) : (
-              <PulseFiller />
+              <PulseFiller isLoading={isLoading} hasError={hasError} />
             )
           }
         </div>
@@ -113,7 +133,6 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
           <div className="w-[80%] h-1 my-2 rounded-full bg-gray-100" />
         )
       } */}
-
     </div>
   );
 };

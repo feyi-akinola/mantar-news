@@ -24,6 +24,8 @@ interface CategoryProps {
 
 const Categories = ({ title }: CategoryProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [hasFetchedArticles, setHasFetchedArticles] = useState<boolean>(false);
   const [articles, setArticles] = useState<NewsArticle[]>([]);
 
   const fetchArticles = async () => {
@@ -38,20 +40,24 @@ const Categories = ({ title }: CategoryProps) => {
 
       if (status === 200) {
         setArticles(transformNewsDataIOArticles(data));
+        setHasFetchedArticles(true);
       } else {
-        throw new Error("Failed to fetch articles");
+        setHasError(true);
       }
     } catch (error) {
       console.error(error);
 
-      throw new Error("Failed to fetch articles");
+      setHasError(true);
     } finally {
       setIsLoading(false);
+      setHasFetchedArticles(true);
     }
   };
 
   useEffect(() => {
-    fetchArticles();
+    if (!hasFetchedArticles) {
+      fetchArticles();
+    }
   }, []);
 
   return (
@@ -61,26 +67,19 @@ const Categories = ({ title }: CategoryProps) => {
         <ViewAll />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {
-          isLoading
-            ? (
-                Array.from({ length: 3 }).map((_, index: number) => (
-                  <div key={index} className={index === 2 ? "hidden xl:block" : ""}>
-                    <RecommendedArticle />
-                  </div>
-                ))
-              )
-            : (
-              articles.map((article, index: number) => (
-                <div
-                  key={article.uuid}
-                  className={index === 2 ? "hidden xl:block" : ""}
-                >
-                  <RecommendedArticle item={article} hasTag={false} />
-                </div>
-              ))
-              )
+          Array.from({ length: 3 }).map((_, index: number) => (
+            <div key={index} className={index === 2 ? "hidden xl:block" : ""}>
+              <RecommendedArticle
+                item={articles.length > 0 ? articles[index] : undefined}
+                isLast={false}
+                hasTag={false}
+                isLoading={isLoading}
+                hasError={hasError}
+              />
+            </div>
+          ))
         }
       </div>
     </div>
