@@ -61,18 +61,25 @@ const Categories = ({ title }: CategoryProps) => {
         <ViewAll />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {
           isLoading
             ? (
-                Array.from({ length: 3 }).map((_, index) => (
-                  <RecommendedArticle key={index} />
+                Array.from({ length: 3 }).map((_, index: number) => (
+                  <div key={index} className={index === 2 ? "hidden xl:block" : ""}>
+                    <RecommendedArticle />
+                  </div>
                 ))
               )
             : (
-                articles.map((article) => (
-                  <RecommendedArticle key={article.uuid} item={article} hasTag={false}/>
-                ))
+              articles.map((article, index: number) => (
+                <div
+                  key={article.uuid}
+                  className={index === 2 ? "hidden xl:block" : ""}
+                >
+                  <RecommendedArticle item={article} hasTag={false} />
+                </div>
+              ))
               )
         }
       </div>

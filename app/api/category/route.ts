@@ -19,7 +19,7 @@ export async function GET(request: Request) {
         category: category,
         language: "en",
         country: "us",
-        size: 2,
+        size: 3,
       },
     });
     const status = response.status;

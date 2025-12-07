@@ -2,11 +2,17 @@
 
 // Libraries
 import axios, { AxiosResponse } from "axios";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 // Components
 import MainArticle from "@/components/MainArticle";
 import Trending from "@/components/Trending";
 import Categories from "@/components/Categories";
+import Footer from "@/components/Footer";
+
 
 // Hooks
 import { useEffect, useState } from "react";
@@ -20,11 +26,21 @@ import { transformNewsDataIOArticles } from "@/utils/data";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [hasFetchedTopNews, setHasFetchedTopNews] = useState(false);
   const [hasFetchedLatestNews, setHasFetchedLatestNews] = useState(false);
-  const [topNews, setTopNews] = useState<NewsArticle[]>([]);
   const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
   const [mainStory, setMainStory] = useState<NewsArticle | null>(null);
+
+  // GSAP
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  
+  useGSAP(() => {
+    ScrollSmoother.create({
+      wrapper: "#scroll-wrapper",
+      content: "#scroll-content",
+      smooth: 0.75,
+      smoothTouch: 0.1,
+    });
+  }, []);
 
   useEffect(() => {
     if (latestNews.length > 0) {
@@ -65,18 +81,30 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-32">
-      <div className="flex flex-col lg:flex-row gap-16 lg:gap-12">
-        <MainArticle item={mainStory} isLoading={isLoading} />
+    <div
+      id="scroll-wrapper"
+      className="antialiased bg-white text-black/90 dark:bg-black/95
+      dark:text-white/90 tracking-wide min-h-screen pt-20
+        ">
+      <div id="scroll-content" className="max-w-[1600px] mx-auto">
+        <div className="flex flex-col gap-14 w-full p-6 xl:gap-24">
+          <div className="flex flex-col gap-32">
+            <div className="flex flex-col lg:flex-row gap-16 lg:gap-12">
+              <MainArticle item={mainStory} isLoading={isLoading} />
 
-        <Trending
-          items={latestNews}
-          isLoading={isLoading} 
-          onItemChange={(item) => setMainStory(item)}
-        />
+              <Trending
+                items={latestNews}
+                isLoading={isLoading}
+                onItemChange={(item) => setMainStory(item)}
+              />
+            </div>
+
+            <Categories />
+          </div>
+        </div>
+
+        <Footer />
       </div>
-
-      <Categories />
     </div>
   );
 }

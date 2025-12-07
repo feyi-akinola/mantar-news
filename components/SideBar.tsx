@@ -2,13 +2,13 @@
 
 // Libraries
 import axios, { AxiosResponse } from "axios";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Components
 import RecommendedArticle from "@/components/RecommendedArticle";
 import ViewAll from "@/components/ViewAll";
-
-// Hooks
-import { useEffect, useState } from "react";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
@@ -19,6 +19,7 @@ import { routes } from "@/app/api/routes";
 const SideBar = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [trending, setTrending] = useState<NewsArticle[]>([]);
+  const pinRef = useRef<HTMLDivElement | null>(null);
 
   const transformTrending = (data: any): NewsArticle[] => {
     if (!data || !Array.isArray(data) || data.length === 0) {
@@ -61,10 +62,40 @@ const SideBar = () => {
     loadTrending();
   }, []);
 
+  // GSAP pin to emulate sticky within ScrollSmoother context
+  useLayoutEffect(() => {
+    const el = pinRef.current;
+    if (!el) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const container = el.parentElement as HTMLElement | null;
+    if (!container) return;
+
+    const NAVBAR_OFFSET_PX = 90; // adjust to match NavBar height
+
+    const st = ScrollTrigger.create({
+      trigger: container,
+      start: `top top+=${NAVBAR_OFFSET_PX}`,
+      end: () => `+=${container.scrollHeight - el.offsetHeight}`,
+      pin: el,
+      pinSpacing: true,
+      pinReparent: true,
+      invalidateOnRefresh: true,
+    });
+
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+
+    return () => {
+      window.removeEventListener("load", onLoad);
+      st.kill();
+    };
+  }, []);
+
   return (
-    <div
-      className="w-full flex flex-3 flex-col lg:shrink-0 gap-4"
-    >
+    <div ref={pinRef} className="self-start w-full lg:w-[360px] flex flex-col
+      gap-4">
 
       {/* Recommended */}
       <div className="flex-between_">
@@ -72,8 +103,8 @@ const SideBar = () => {
         <ViewAll />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
-        xl:grid-cols-1 gap-y-8 gap-x-4 items-start overflow-y-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-y-8
+        gap-x-4 items-start">
         {
           isLoading
             ? (
