@@ -32,7 +32,7 @@ const Trending = ({ items, isLoading, hasError, onItemChange  }: TrendingProps) 
       <div className="flex flex-col w-full
          gap-8 text-black/90 dark:text-white/90">
         {
-          Array.from({ length: 3 }).map((item, index) => (
+          Array.from({ length: 3 }).map((_, index) => (
             <TrendingArticle
               key={index}
               item={items.length > 0 ? items[index] : undefined}

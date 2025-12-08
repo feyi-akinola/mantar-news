@@ -144,6 +144,14 @@ body {
     @apply scale-x-100 origin-bottom-left;
   }
 
+  .underline_ {
+    @apply relative text-amber-400;
+  }
+  .underline_::after {
+    @apply absolute h-0.5 w-full bg-amber-400 -bottom-1 left-0 content-[''] scale-x-100
+      origin-bottom-right;
+  }
+
   .text-gray_ {
     @apply text-gray-300 dark:text-gray-700;
   }

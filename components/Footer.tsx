@@ -2,8 +2,16 @@
 import Image from "next/image";
 
 export default function Footer() {
+  const links = [
+    "About",
+    "Contact",
+    "Privacy",
+    "Terms",
+    "RSS",
+  ];
+
   return (
-    <footer className="w-full mt-42 pb-20 border-t border-gray-300 dark:border-gray-800/40">
+    <footer className="w-full pb-20 border-t border-gray-300 dark:border-gray-800/40">
       <div className="max-w-6xl mx-auto px-6 py-10 flex-center_ flex-col gap-8">
 
         {/* Branding */}
@@ -26,23 +34,19 @@ export default function Footer() {
 
         {/* Links */}
         <div className="flex flex-wrap gap-6 text-xs lg:text-sm font-medium text-gray-600 dark:text-gray-300">
-          <a href="/about" className="hover:text-black dark:hover:text-white">About</a>
-          <a href="/contact" className="hover:text-black dark:hover:text-white">Contact</a>
-          <a href="/privacy" className="hover:text-black dark:hover:text-white">Privacy</a>
-          <a href="/terms" className="hover:text-black dark:hover:text-white">Terms</a>
-          <a href="/rss" className="hover:text-black dark:hover:text-white">RSS</a>
+          {
+            links.map((item, index) => (
+              <a key={index} href="#" className="hover:text-black dark:hover:text-white button-text_">
+                {item}
+              </a>
+            ))
+          }
         </div>
 
         {/* Bottom */}
         <div className="text-xs text-gray-500 dark:text-gray-400 text-center lg:text-start">
           © {new Date().getFullYear()} Mantar News · Built by{" "}
-          <a
-            href="https://your-portfolio-link.com"
-            target="_blank"
-            className="hover:text-black dark:hover:text-white"
-          >
-            Feyi Akinola
-          </a>
+          <a href="#" className="font-bold" > Feyi Akinola</a>
           {" "}using Next.js & NewsData.io
         </div>
       </div>

@@ -23,6 +23,7 @@ import { NewsArticle } from "@/types/newsArticle";
 // Constants
 import { routes } from "@/app/api/routes";
 import { transformNewsDataIOArticles } from "@/utils/data";
+import Newsletter from "@/components/Newsletter";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -105,6 +106,8 @@ export default function Home() {
             <Categories />
           </div>
         </div>
+
+        <Newsletter />
 
         <Footer />
       </div>

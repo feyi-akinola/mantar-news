@@ -29,21 +29,25 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isLoading || hasError) return;
+    // Reset progress while loading or on error
+    if (isLoading || hasError) {
+      setProgress(0);
+      return;
+    }
 
     if (!isActive) {
       setProgress(0);
       return;
     }
 
-    // animate progress for 5s
+    // animate progress for 10s
     setProgress(100);
     const timer = setTimeout(() => {
       onProgressComplete && onProgressComplete();
     }, 10000);
 
     return () => clearTimeout(timer);
-  }, [isActive]);
+  }, [isActive, isLoading, hasError]);
 
   useEffect(() => {
     // reset when the article image changes
@@ -58,9 +62,8 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
           <div className="w-full h-1 bg-gray_ rounded-full
             overflow-hidden">
             <div
-              className="h-full bg-red-500 transition-all duration-10000
-                ease-linear"
-              style={{ width: `${progress}%` }}
+              className="h-full bg-red-500 transition-all"
+              style={{ width: `${progress}%`, transition: 'width 10s linear' }}
             />
           </div>
         )
