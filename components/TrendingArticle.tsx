@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 // Hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Components
 import CategoryChip from "@/components/CategoryChip";
@@ -27,24 +27,48 @@ interface TrendingArticleProps {
 export default function TrendingArticle({ item, isLast, isActive, onProgressComplete, isLoading, hasError }: TrendingArticleProps) {
   const [progress, setProgress] = useState<number>(0);
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+  const [paused, setPaused] = useState<boolean>(false);
+  const [remainingMs, setRemainingMs] = useState<number | null>(null);
+
+  const DURATION_MS = 6000;
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const startRef = useRef<number | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const barRef = useRef<HTMLDivElement | null>(null);
+
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  };
 
   useEffect(() => {
     // Reset progress while loading or on error
     if (isLoading || hasError) {
+      clearTimer();
+      setPaused(false);
+      setRemainingMs(null);
       setProgress(0);
       return;
     }
 
     if (!isActive) {
+      clearTimer();
+      setPaused(false);
+      setRemainingMs(null);
       setProgress(0);
       return;
     }
 
     // animate progress for 10s
     setProgress(100);
+    startRef.current = performance.now();
+    clearTimer();
     const timer = setTimeout(() => {
       onProgressComplete && onProgressComplete();
-    }, 10000);
+    }, DURATION_MS);
+    timerRef.current = timer;
 
     return () => clearTimeout(timer);
   }, [isActive, isLoading, hasError]);
@@ -54,20 +78,60 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
     setImageLoaded(false);
   }, [item?.image_url]);
 
+  const handleMouseEnter = () => {
+    if (!isActive || isLoading || hasError || paused) return;
+
+    // Freeze current progress by measuring current width
+    const trackWidth = trackRef.current?.offsetWidth ?? 0;
+    const barWidth = barRef.current?.offsetWidth ?? 0;
+
+    if (trackWidth > 0) {
+      const pct = Math.min(100, Math.max(0, (barWidth / trackWidth) * 100));
+      setProgress(pct);
+      const remaining = Math.max(0, DURATION_MS * (100 - pct) / 100);
+      setRemainingMs(remaining);
+      setPaused(true);
+      clearTimer();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isActive || isLoading || hasError || !paused) return;
+
+    const remaining = remainingMs ?? DURATION_MS;
+    setPaused(false);
+    startRef.current = performance.now();
+    // Resume transition to 100 with remaining time
+    setProgress(100);
+    clearTimer();
+    timerRef.current = setTimeout(() => {
+      onProgressComplete && onProgressComplete();
+    }, remaining);
+  };
+
   return (
-    <div className="flex-center_ flex-col gap-2">
+    <div
+      className="flex-center_ flex-col gap-2"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* Progress Bar */}
-      {
-        !isLoading && !hasError && (
-          <div className="w-full h-1 bg-gray_ rounded-full
-            overflow-hidden">
-            <div
-              className="h-full bg-red-500 transition-all"
-              style={{ width: `${progress}%`, transition: 'width 10s linear' }}
-            />
-          </div>
-        )
-      }
+      <div
+        ref={trackRef}
+        className={`w-full h-1 rounded-full overflow-hidden ${isActive && !isLoading && !hasError ? 'bg-gray_' : 'bg-transparent'}`}
+      >
+        <div
+          ref={barRef}
+          className="h-full bg-red-500"
+          style={{
+            width: isActive && !isLoading && !hasError ? `${progress}%` : '0%',
+            transition:
+              isActive && !isLoading && !hasError && !paused
+                ? `width ${remainingMs ?? DURATION_MS}ms linear`
+                : 'none',
+          }}
+        />
+      </div>
 
       <div className="flex-between_ gap-4 w-full">
         <div className="relative w-40 h-35 lg:w-55 shrink-0 rounded-xl overflow-hidden">
