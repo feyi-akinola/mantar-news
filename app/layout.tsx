@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="w-screen overflow-x-hidden" suppressHydrationWarning>
       <body>
         <Providers>
           <NavBar />
