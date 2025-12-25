@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 // Styles
-import "@/app/globals.css";
+import "@/app/globals.tailwind.css";
 
 // Components
 import NavBar from "@/components/NavBar";

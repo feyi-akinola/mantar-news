@@ -119,7 +119,7 @@ const SideBar = () => {
               key={index}
               item={articles.length > 0 ? articles[index] : undefined}
               isLast={false}
-              hasTag={false}
+              hasTag={true}
               isLoading={isLoading}
               hasError={hasError}
             />

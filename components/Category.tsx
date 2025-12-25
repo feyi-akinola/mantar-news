@@ -15,7 +15,6 @@ import { transformNewsDataIOArticles } from "@/utils/data";
 
 // Components
 import RecommendedArticle from "./RecommendedArticle";
-import TrendingArticle from "./TrendingArticle";
 import ViewAll from "./ViewAll";
 
 interface CategoryProps {

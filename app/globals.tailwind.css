@@ -143,6 +143,19 @@ body {
   .button-text_:hover::after {
     @apply scale-x-100 origin-bottom-left;
   }
+  
+  .multi-underline-group_ {
+    background-image: linear-gradient(90deg, red, orange);
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    background-position: left bottom;
+
+    text-decoration: none;
+  }
+  
+  /* .group:hover .multi-underline-group_ {
+    background-size: 100% 2px;
+  } */
 
   .underline_ {
     @apply relative text-amber-400;
