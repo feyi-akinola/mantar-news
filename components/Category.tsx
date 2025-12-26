@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios";
 
 // Hooks
 import { useEffect, useState } from "react";
+import { useCountryStore } from "@/store/useCountryStore";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
@@ -26,12 +27,14 @@ const Categories = ({ title }: CategoryProps) => {
   const [hasError, setHasError] = useState<boolean>(false);
   const [hasFetchedArticles, setHasFetchedArticles] = useState<boolean>(false);
   const [articles, setArticles] = useState<NewsArticle[]>([]);
+  const { country } = useCountryStore();
 
   const fetchArticles = async () => {
     try {
       const response: AxiosResponse = await axios.get(routes.category, {
         params: {
           category: title,
+          country,
         },
       });
       const data = await response.data ?? [];
@@ -57,7 +60,14 @@ const Categories = ({ title }: CategoryProps) => {
     if (!hasFetchedArticles) {
       fetchArticles();
     }
-  }, []);
+  }, [hasFetchedArticles]);
+
+  useEffect(() => {
+    setHasFetchedArticles(false);
+    setIsLoading(true);
+    setHasError(false);
+    setArticles([]);
+  }, [country]);
 
   return (
     <div className="flex flex-col gap-6">

@@ -8,6 +8,7 @@ import { urls } from "@/app/api/routes";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const category = searchParams.get("category");
+  const country = (searchParams.get("country") ?? "us").toLowerCase();
   
   const url = `${urls.newsDataIO}/latest`;
   const apiKey = process.env.NEXT_PUBLIC_NEWSDATAIO_API_KEY;
@@ -18,7 +19,7 @@ export async function GET(request: Request) {
         apikey: apiKey,
         category: category,
         language: "en",
-        country: "us",
+        country,
         size: 3,
         removeduplicate: 1,
       },

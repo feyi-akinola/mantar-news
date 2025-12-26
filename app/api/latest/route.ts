@@ -5,20 +5,24 @@ import { NextResponse } from "next/server";
 // Constants
 import { urls } from "@/app/api/routes";
 
-export async function GET() {
+export async function GET(request: Request) {
   const url = `${urls.newsDataIO}/latest`;
   const apiKey = process.env.NEXT_PUBLIC_NEWSDATAIO_API_KEY;
 
   console.log(`[DEBUG]: ${url}`);
   console.log(`[DEBUG]: ${apiKey}`);
 
+  const { searchParams } = new URL(request.url);
+  const country = (searchParams.get("country") ?? "us").toLowerCase();
+
   try {
     const response: AxiosResponse = await axios.get(url, {
       params: {
         apikey: apiKey,
         language: "en",
-        category: "breaking",
-        country: "us",
+        category: "top,breaking",
+        q: "breaking OR top",
+        country,
         size: 3,
         removeduplicate: 1,
       },

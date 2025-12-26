@@ -5,9 +5,11 @@ import { NextResponse } from "next/server";
 // Constants
 import { urls } from "@/app/api/routes";
 
-export async function GET() {
+export async function GET(request: Request) {
   const url = `${urls.GNewsAPI}/top-headlines`;
   const apiKey = process.env.NEXT_PUBLIC_GNEWS_API_KEY;
+  const { searchParams } = new URL(request.url);
+  const country = (searchParams.get("country") ?? "us").toLowerCase();
 
   try {
     const response: AxiosResponse = await axios.get(url, {
@@ -15,7 +17,7 @@ export async function GET() {
         apikey: apiKey,
         category: "general",
         lang: "en",
-        country: "us",
+        country,
         max: 3,
       },
       headers: {

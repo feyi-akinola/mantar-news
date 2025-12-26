@@ -13,12 +13,14 @@ import { NewsArticle } from "@/types/newsArticle";
 
 // Constants
 import { routes } from "@/app/api/routes";
+import { useCountryStore } from "@/store/useCountryStore";
 
 const SideBar = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const pinRef = useRef<HTMLDivElement | null>(null);
+  const { country } = useCountryStore();
 
   const transformArticles = (data: any): NewsArticle[] => {
     if (!data || !Array.isArray(data) || data.length === 0) {
@@ -38,7 +40,9 @@ const SideBar = () => {
   };
 
   const fetchArticles = async () => {
-    const response: AxiosResponse = await axios.get(routes.trending);
+    const response: AxiosResponse = await axios.get(routes.trending, {
+      params: { country },
+    });
     const data = await response.data ?? [];
     const status = response.status;
 
@@ -52,6 +56,9 @@ const SideBar = () => {
   useEffect(() => {
     const loadArticles = async () => {
       try {
+        setIsLoading(true);
+        setHasError(false);
+        setArticles([]);
         await fetchArticles();
       } catch (error) {
         console.error(error);
@@ -62,7 +69,7 @@ const SideBar = () => {
     };
 
     loadArticles();
-  }, []);
+  }, [country]);
 
   // GSAP pin only on xl+ screens
   useLayoutEffect(() => {

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import ThemeButton from "./ThemeButton";
 import HamburgerMenu from "./HamburgerMenu";
+import CountryPicker from "./CountryPicker";
 import { categories } from "@/app/constants";
 
 const NavBar = () => {
@@ -48,10 +49,12 @@ const NavBar = () => {
           }
         </div>
 
-        <div className="flex-gap_">
+        <div className="flex-gap_ items-center">
           <div className="hidden lg:block">
             <SearchBar inMenu={false}/>
           </div>
+
+          <CountryPicker />
 
           {
             mounted && <ThemeButton setTheme={setTheme} resolvedTheme={resolvedTheme} />

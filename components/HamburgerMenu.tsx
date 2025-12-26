@@ -24,8 +24,8 @@ const HamburgerMenu = () => {
 
       <div
         className={`absolute w-screen h-screen bg-white dark:bg-black flex-col 
-          ${!isOpen ? 'translate-x-0' : 'translate-x-340'} px-12 py-8 gap-24 left-0 
-          flex top-0 z-100 pt-18 transition-all duration-450 ${!isOpen ? 'ease-out' : 'ease-in'}
+          ${isOpen ? 'translate-x-0' : 'translate-x-340'} px-12 py-8 gap-24 left-0 
+          flex top-0 z-100 pt-18 transition-all duration-450 ${isOpen ? 'ease-out' : 'ease-in'}
           items-start`}>
         <SearchBar inMenu/>
 

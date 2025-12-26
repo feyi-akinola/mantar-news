@@ -16,6 +16,7 @@ import Footer from "@/components/Footer";
 
 // Hooks
 import { useEffect, useState } from "react";
+import { useCountryStore } from "@/store/useCountryStore";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
@@ -31,6 +32,7 @@ export default function Home() {
   const [hasFetchedLatestNews, setHasFetchedLatestNews] = useState(false);
   const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
   const [mainStory, setMainStory] = useState<NewsArticle | null>(null);
+  const { country } = useCountryStore();
 
   // GSAP
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -54,6 +56,8 @@ export default function Home() {
     const loadLatestNews = async () => {
       if (!hasFetchedLatestNews) {
         try {
+          setIsLoading(true);
+          setHasError(false);
           await fetchLatestNews();
         } catch (error) {
           console.error(error);
@@ -65,10 +69,19 @@ export default function Home() {
     };
     
     loadLatestNews();
-  }, [hasFetchedLatestNews]);
+  }, [hasFetchedLatestNews, country]);
+
+  useEffect(() => {
+    // Refetch when country changes
+    setHasFetchedLatestNews(false);
+    setLatestNews([]);
+    setMainStory(null);
+  }, [country]);
 
   const fetchLatestNews = async () => {
-    const response: AxiosResponse = await axios.get(routes.latest);
+    const response: AxiosResponse = await axios.get(routes.latest, {
+      params: { country },
+    });
     const data = await response.data ?? [];
     const status = response.status;
 
