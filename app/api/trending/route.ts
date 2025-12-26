@@ -18,7 +18,14 @@ export async function GET() {
         country: "us",
         max: 3,
       },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
     });
+    
     const status = response.status;
     
     if (status === 200 && response.data) {
@@ -26,11 +33,24 @@ export async function GET() {
 
       return NextResponse.json(data, { status: 200 });
     } else {
-      return NextResponse.json({ error: "Failed to fetch trending news" }, { status: 500 });
+      return NextResponse.json({
+        success: false,
+        error: {
+          message: "Failed to fetch trending news",
+          statusText: response.statusText,
+          data: response.data, 
+        },
+      }, { status: 500 });
     }
   } catch (error) {
     console.error(error);
 
-    return NextResponse.json({ error: "Failed to fetch trending news" }, { status: 500 });
+    return NextResponse.json({
+      success: false,
+      error: {
+        message: "Failed to fetch trending news",
+        data: error,
+      },
+    }, { status: 500 });
   }
 } 
