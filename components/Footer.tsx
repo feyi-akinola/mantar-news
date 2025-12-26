@@ -36,7 +36,7 @@ export default function Footer() {
         <div className="flex flex-wrap gap-6 text-xs lg:text-sm font-medium text-gray-600 dark:text-gray-300">
           {
             links.map((item, index) => (
-              <a key={index} href="#" className="hover:text-black dark:hover:text-white button-text_">
+              <a key={index} href="#" className="button-text_">
                 {item}
               </a>
             ))

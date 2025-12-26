@@ -110,29 +110,11 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
   };
 
   return (
-    <div
+    <article
       className="flex-center_ flex-col gap-2"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Progress Bar */}
-      <div
-        ref={trackRef}
-        className={`w-full h-1 rounded-full overflow-hidden ${isActive && !isLoading && !hasError ? 'bg-gray_' : 'bg-transparent'}`}
-      >
-        <div
-          ref={barRef}
-          className="h-full bg-red-500"
-          style={{
-            width: isActive && !isLoading && !hasError ? `${progress}%` : '0%',
-            transition:
-              isActive && !isLoading && !hasError && !paused
-                ? `width ${remainingMs ?? DURATION_MS}ms linear`
-                : 'none',
-          }}
-        />
-      </div>
-
       <div className="flex-between_ gap-4 w-full">
         <div className="relative w-40 h-35 lg:w-55 shrink-0 rounded-xl overflow-hidden">
           {
@@ -162,12 +144,30 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
           }
         </div>
 
-        <div className="flex flex-col w-full gap-4">
+        <div className="flex flex-col w-full gap-2">
           {
             item
               ? <CategoryChip category={item.categories[0]} />
               : <PulseFiller isLoading={isLoading} hasError={hasError} />
           }
+
+          {/* Progress Bar */}
+          <div
+            ref={trackRef}
+            className={`w-full h-1 rounded-full overflow-hidden ${isActive && !isLoading && !hasError ? 'bg-gray_' : 'bg-transparent'}`}
+          >
+            <div
+              ref={barRef}
+              className="h-full bg-red-500"
+              style={{
+                width: isActive && !isLoading && !hasError ? `${progress}%` : '0%',
+                transition:
+                  isActive && !isLoading && !hasError && !paused
+                    ? `width ${remainingMs ?? DURATION_MS}ms linear`
+                    : 'none',
+              }}
+            />
+          </div>
 
           {
             item ? (
@@ -184,7 +184,7 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
 
           {
             item ? (
-              <p className="text-xs font-regular text-gray-400">
+              <p className="mt-2 text-xs font-regular text-gray-400">
                 {formatTime(item.published_at)}
               </p>
             ) : (
@@ -193,13 +193,6 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
           }
         </div>
       </div>
-
-      {/* Divider */}
-      {/* {
-        !isLast && isInSideBar && (
-          <div className="w-[80%] h-1 my-2 rounded-full bg-gray-100" />
-        )
-      } */}
-    </div>
+    </article>
   );
 };

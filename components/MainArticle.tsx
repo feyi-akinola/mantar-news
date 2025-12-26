@@ -20,7 +20,7 @@ export default function MainArticle({ item, isLoading, hasError }: MainArticlePr
   const bgColorStyle = isLoading ? "loading-bg_" : hasError ? "error-bg_" : "bg-gray_";
 
   return (
-    <div className="flex-7">
+    <article className="flex-5">
       <div
         style={{ backgroundImage: isLoading || hasError ? undefined : bgImgStyle }}
         className={`relative ${bgColorStyle} gap-4 w-full h-90
@@ -48,7 +48,6 @@ export default function MainArticle({ item, isLoading, hasError }: MainArticlePr
           height={14}
         />
       </div>
-
-    </div>
+    </article>
   );
 };
