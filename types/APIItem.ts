@@ -1,3 +1,4 @@
+type ArticleSource = "NewsDataIO" | "GNews";
 
 export type TheNewsAPIItem = {
   uuid: string;   
@@ -29,6 +30,7 @@ export type GNewsAPIItem = {
     name: string;
     url: string;
   };
+  apiSource?: ArticleSource;
 }
 
 export type NewsDataIOAPIItem = {
@@ -46,4 +48,5 @@ export type NewsDataIOAPIItem = {
   source_icon: string;
   source_url: string;
   image_url: string;
+  apiSource?: ArticleSource;
 }
