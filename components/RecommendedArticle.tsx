@@ -1,9 +1,6 @@
 // Libraries
 import Image from "next/image";
 
-// Hooks
-import { useState, useEffect } from "react";
-
 // Components
 import CategoryChip from "@/components/CategoryChip";
 import { PulseFiller, PulseFillerText } from "@/components/PulseFiller";
@@ -24,13 +21,6 @@ interface RecommendedArticleProps {
 }
 
 export default function RecommendedArticle({ item, isLast, hasTag, isLoading, hasError }: RecommendedArticleProps) {
-  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
-
-  useEffect(() => {
-    // reset when the article image changes
-    setImageLoaded(false);
-  }, [item?.image_url]);
-
   return (
     <article>
       <a href="#" className="flex-center_ flex-col gap-2 group button-text_">
@@ -60,9 +50,9 @@ export default function RecommendedArticle({ item, isLast, hasTag, isLoading, ha
         }
 
         { /* Image */}
-        <div className="relative h-70 lg:h-60 w-full shrink-0 rounded-xl overflow-hidden">
+        <div className="relative h-70 lg:h-60 w-full shrink-0 rounded-3xl overflow-hidden">
           {
-            (!imageLoaded || !(item && item.image_url)) && (
+            !(item && item.image_url) && (
               <div
                 className={`absolute inset-0 rounded-3xl flex-center_
                 ${isLoading ? 'loading-bg_ animate-pulse' : hasError ? 'error-bg_' : ''} `}>
@@ -82,9 +72,9 @@ export default function RecommendedArticle({ item, isLast, hasTag, isLoading, ha
                 alt={item.title.slice(0, 10) + "..."}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px)"
-                className="w-full h-full object-cover rounded-2xl bg-gray-100
+                className="w-full h-full object-cover rounded-3xl bg-gray-100
                   group-hover:scale-105 transition-all duration-300 ease-out"
-                onLoadingComplete={() => setImageLoaded(true)}
+                // onLoadingComplete={() => setImageLoaded(true)}
               />
             )
           }
