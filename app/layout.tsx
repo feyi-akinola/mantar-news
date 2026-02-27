@@ -5,12 +5,10 @@ import type { Metadata } from "next";
 import "@/app/globals.tailwind.css";
 
 // Components
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
+import SplashHandler from "@/components/SplashHandler";
 
 // Providers
 import Providers from "@/app/providers";
-
 
 export const metadata: Metadata = {
   title: "Mantar News",
@@ -26,9 +24,7 @@ export default function RootLayout({
     <html lang="en" className="w-screen overflow-x-hidden" suppressHydrationWarning>
       <body>
         <Providers>
-          <NavBar />
-          
-          {children}
+          <SplashHandler children={children}/>
         </Providers>
       </body>
     </html>
