@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-const Splash = () => {
+const MainLoading = () => {
   return (
-    <div className="w-full h-full bg-black flex-center_ flex-col gap-4">
+    <div className="fixed w-screen h-screen bg-black flex-center_ flex-col gap-4 z-1000000">
       <h1 className="text-white text-4xl font-bold font-expanded animate-pulse loop-infinite">
         Mantar News
       </h1>
@@ -17,4 +17,4 @@ const Splash = () => {
   );
 };
 
-export default Splash;
+export default MainLoading;

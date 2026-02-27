@@ -1,3 +1,5 @@
+"use client";
+
 // Libraries
 import axios, { AxiosResponse } from "axios";
 

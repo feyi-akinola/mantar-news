@@ -1,3 +1,5 @@
+"use client";
+
 // Libraries
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";

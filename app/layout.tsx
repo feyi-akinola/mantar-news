@@ -5,7 +5,9 @@ import type { Metadata } from "next";
 import "@/app/globals.tailwind.css";
 
 // Components
-import SplashHandler from "@/components/SplashHandler";
+import NavBar from "@/components/NavBar";
+import Newsletter from "@/components/Newsletter";
+import Footer from "@/components/Footer";
 
 // Providers
 import Providers from "@/app/providers";
@@ -24,7 +26,13 @@ export default function RootLayout({
     <html lang="en" className="w-screen overflow-x-hidden" suppressHydrationWarning>
       <body>
         <Providers>
-          <SplashHandler children={children}/>
+          <NavBar />
+          
+          {children}
+
+          <Newsletter />
+
+          <Footer />
         </Providers>
       </body>
     </html>
