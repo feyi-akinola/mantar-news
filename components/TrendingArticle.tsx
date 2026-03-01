@@ -111,7 +111,7 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
   };
 
   return (
-    <Link href={item?.url ?? "#"} target="_blank">
+    <div onClick={() => item?.url && window.open(item.url, "_blank")}>
       <article
         className="flex-center_ flex-col gap-2 group"
         onMouseEnter={handleMouseEnter}
@@ -196,6 +196,6 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
           </div>
         </div>
       </article>
-    </Link>
+    </div>
   );
 };

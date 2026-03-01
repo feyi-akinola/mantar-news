@@ -23,7 +23,7 @@ interface RecommendedArticleProps {
 
 export default function RecommendedArticle({ item, isLast, hasTag, isLoading, hasError }: RecommendedArticleProps) {
   return (
-    <Link href={item?.url ?? "#"} target="_blank">
+    <div onClick={() => item?.url && window.open(item.url, "_blank")}>
       <article className="flex-center_ flex-col gap-2 group button-text_">
         { /* Category and Time */}
         {
@@ -99,6 +99,6 @@ export default function RecommendedArticle({ item, isLast, hasTag, isLoading, ha
           }
         </div>
       </article>
-    </Link>
+    </div>
   );
 };

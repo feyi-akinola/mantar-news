@@ -13,9 +13,18 @@ import Footer from "@/components/Footer";
 import Providers from "@/providers/theme-provider";
 import SmoothScroll from "@/components/SmoothScroll";
 
+const title = "Mantar News";
+const desc = "Mantar News is a news website that provides the latest news and updates from all around the world.";
+
 export const metadata: Metadata = {
-  title: "Mantar News",
-  description: "Mantar News is a news website that provides the latest news and updates from all around the world.",
+  title: title,
+  description: desc,
+  openGraph: {
+    title: title,
+    description: desc,
+    url: `https://mantar-news.vercel.app/`,
+    images: [{ url: "/images/mantar-banner.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function RootLayout({

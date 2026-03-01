@@ -11,7 +11,7 @@
   // API Routes
   type APIRoute = "top" | "trending" | "latest" | "category" | "search";
 
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   export const routes: Record<APIRoute, string> = {
     top: `${BASE_URL}/api/top`,
