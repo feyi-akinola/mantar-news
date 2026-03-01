@@ -21,7 +21,7 @@ export default function MainArticle({ item, isLoading, hasError }: MainArticlePr
   const bgColorStyle = isLoading ? "loading-bg_" : hasError ? "error-bg_" : "bg-gray_";
 
   return (
-    <Link href={item?.url ?? "#"} target={item?.url ?? "_blank"}>
+    <Link href={item?.url ?? "#"} target={item?.url ?? "_blank"} className="flex-5">
       <article        
         style={{ backgroundImage: isLoading || hasError ? undefined : bgImgStyle }}
         className={`relative ${bgColorStyle} gap-4 w-full h-90 p-8 bg-center
