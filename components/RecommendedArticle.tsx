@@ -4,13 +4,14 @@ import Image from "next/image";
 // Components
 import CategoryChip from "@/components/CategoryChip";
 import { PulseFiller, PulseFillerText } from "@/components/PulseFiller";
-import ImagePlaceholder from "./ImagePlaceholder";
+import ImagePlaceholder from "./ImagePlaceholderIcon";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
 
 // Utils
 import { formatTime } from "@/utils/time";
+import Link from "next/link";
 
 interface RecommendedArticleProps {
   item?: NewsArticle;
@@ -22,8 +23,8 @@ interface RecommendedArticleProps {
 
 export default function RecommendedArticle({ item, isLast, hasTag, isLoading, hasError }: RecommendedArticleProps) {
   return (
-    <article>
-      <a href="#" className="flex-center_ flex-col gap-2 group button-text_">
+    <Link href={item?.url ?? "#"} target="_blank">
+      <article className="flex-center_ flex-col gap-2 group button-text_">
         { /* Category and Time */}
         {
           hasTag && (
@@ -97,7 +98,7 @@ export default function RecommendedArticle({ item, isLast, hasTag, isLoading, ha
             )
           }
         </div>
-      </a>
-    </article>
+      </article>
+    </Link>
   );
 };

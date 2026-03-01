@@ -10,7 +10,7 @@ import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 
 // Providers
-import Providers from "@/app/providers";
+import Providers from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "Mantar News",

@@ -7,13 +7,14 @@ import { useState, useEffect, useRef } from "react";
 // Components
 import CategoryChip from "@/components/CategoryChip";
 import { PulseFiller, PulseFillerText } from "@/components/PulseFiller";
-import ImagePlaceholder from "./ImagePlaceholder";
+import ImagePlaceholder from "./ImagePlaceholderIcon";
 
 // Types
 import { NewsArticle } from "@/types/newsArticle";
 
 // Utils
 import { formatTime } from "@/utils/time";
+import Link from "next/link";
 
 interface TrendingArticleProps {
   item?: NewsArticle;
@@ -110,89 +111,91 @@ export default function TrendingArticle({ item, isLast, isActive, onProgressComp
   };
 
   return (
-    <article
-      className="flex-center_ flex-col gap-2"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="flex-between_ gap-4 w-full">
-        <div className="relative w-40 h-35 lg:w-55 shrink-0 rounded-xl overflow-hidden">
-          {
-            (!imageLoaded || !(item && item.image_url)) && (
-              <div className={`absolute inset-0 rounded-xl flex-center_
-                ${isLoading ? 'loading-bg_' : hasError ? 'error-bg_' : 'bg-gray_'} `}>
-                <ImagePlaceholder
-                  isLoading={isLoading}
-                  hasError={hasError}
-                  width={10}
-                  height={10}
+    <Link href={item?.url ?? "#"} target="_blank">
+      <article
+        className="flex-center_ flex-col gap-2 group"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="flex-between_ gap-4 w-full">
+          <div className="relative w-40 h-35 lg:w-55 shrink-0 rounded-xl overflow-hidden">
+            {
+              (!imageLoaded || !(item && item.image_url)) && (
+                <div className={`absolute inset-0 rounded-xl flex-center_
+                  ${isLoading ? 'loading-bg_' : hasError ? 'error-bg_' : 'bg-gray_'} `}>
+                  <ImagePlaceholder
+                    isLoading={isLoading}
+                    hasError={hasError}
+                    width={10}
+                    height={10}
+                  />
+                </div>
+              )
+            }
+            {
+              (item && item.image_url) && (
+                <Image
+                  src={item.image_url}
+                  alt={item.title.slice(0, 10) + "..."}
+                  width={120}
+                  height={120}
+                  className="w-full h-full object-cover rounded-xl bg-gray-100"
+                  onLoadingComplete={() => setImageLoaded(true)}
                 />
-              </div>
-            )
-          }
-          {
-            (item && item.image_url) && (
-              <Image
-                src={item.image_url}
-                alt={item.title.slice(0, 10) + "..."}
-                width={120}
-                height={120}
-                className="w-full h-full object-cover rounded-xl bg-gray-100"
-                onLoadingComplete={() => setImageLoaded(true)}
-              />
-            )
-          }
-        </div>
-
-        <div className="flex flex-col w-full gap-2">
-          {
-            item
-              ? <CategoryChip category={item.categories[0]} />
-              : <PulseFiller isLoading={isLoading} hasError={hasError} />
-          }
-
-          {/* Progress Bar */}
-          <div
-            ref={trackRef}
-            className={`w-full h-1 rounded-full overflow-hidden ${isActive && !isLoading && !hasError ? 'bg-gray_' : 'bg-transparent'}`}
-          >
-            <div
-              ref={barRef}
-              className="h-full bg-red-500"
-              style={{
-                width: isActive && !isLoading && !hasError ? `${progress}%` : '0%',
-                transition:
-                  isActive && !isLoading && !hasError && !paused
-                    ? `width ${remainingMs ?? DURATION_MS}ms linear`
-                    : 'none',
-              }}
-            />
+              )
+            }
           </div>
 
-          {
-            item ? (
-              <h3 className="font-bold line-clamp-3 leading-tight">{item.title}</h3>
-            ) : (
-              <PulseFillerText
-                lines={3}
-                height={3.5}
-                gap={2}
-                isLoading={isLoading}
-                hasError={hasError} />
-            )
-          }
+          <div className="flex flex-col w-full gap-2">
+            {
+              item
+                ? <CategoryChip category={item.categories[0]} />
+                : <PulseFiller isLoading={isLoading} hasError={hasError} />
+            }
 
-          {
-            item ? (
-              <p className="mt-2 text-xs font-regular text-gray-400">
-                {formatTime(item.published_at)}
-              </p>
-            ) : (
-              <PulseFiller isLoading={isLoading} hasError={hasError} />
-            )
-          }
+            {/* Progress Bar */}
+            <div
+              ref={trackRef}
+              className={`w-full h-1 rounded-full overflow-hidden ${isActive && !isLoading && !hasError ? 'bg-gray_' : 'bg-transparent'}`}
+            >
+              <div
+                ref={barRef}
+                className="h-full bg-red-500"
+                style={{
+                  width: isActive && !isLoading && !hasError ? `${progress}%` : '0%',
+                  transition:
+                    isActive && !isLoading && !hasError && !paused
+                      ? `width ${remainingMs ?? DURATION_MS}ms linear`
+                      : 'none',
+                }}
+              />
+            </div>
+
+            {
+              item ? (
+                <h3 className="font-bold line-clamp-3 leading-tight">{item.title}</h3>
+              ) : (
+                <PulseFillerText
+                  lines={3}
+                  height={3.5}
+                  gap={2}
+                  isLoading={isLoading}
+                  hasError={hasError} />
+              )
+            }
+
+            {
+              item ? (
+                <p className="mt-2 text-xs font-regular text-gray-400">
+                  {formatTime(item.published_at)}
+                </p>
+              ) : (
+                <PulseFiller isLoading={isLoading} hasError={hasError} />
+              )
+            }
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 };

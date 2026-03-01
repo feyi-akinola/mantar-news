@@ -7,7 +7,7 @@ interface ImagePlaceholderProps {
   height: number;
 }
 
-const ImagePlaceholder = ({ isLoading, hasError, width, height }: ImagePlaceholderProps) => {
+const ImagePlaceholderIcon = ({ isLoading, hasError, width, height }: ImagePlaceholderProps) => {
   return (
     <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
       {
@@ -26,4 +26,4 @@ const ImagePlaceholder = ({ isLoading, hasError, width, height }: ImagePlacehold
   );
 };
 
-export default ImagePlaceholder;
+export default ImagePlaceholderIcon;

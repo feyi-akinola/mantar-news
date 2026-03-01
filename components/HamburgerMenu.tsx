@@ -1,7 +1,7 @@
 import { MenuIcon } from "lucide-react";
 import { useState } from "react";
 import SearchBar from "./SearchBar";
-import { categories } from "@/app/constants";
+import { categories } from "@/constants/constants";
 import Link from "next/link";
 
 const HamburgerMenu = () => {

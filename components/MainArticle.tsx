@@ -5,7 +5,8 @@ import { NewsArticle } from "@/types/newsArticle";
 // Components
 import CategoryChip from "@/components/CategoryChip";
 import { PulseFiller, PulseFillerText } from "./PulseFiller";
-import ImagePlaceholder from "./ImagePlaceholder";
+import ImagePlaceholderIcon from "./ImagePlaceholderIcon";
+import Link from "next/link";
 
 interface MainArticleProps {
   item: NewsArticle | null;
@@ -20,12 +21,12 @@ export default function MainArticle({ item, isLoading, hasError }: MainArticlePr
   const bgColorStyle = isLoading ? "loading-bg_" : hasError ? "error-bg_" : "bg-gray_";
 
   return (
-    <article className="flex-5">
-      <div
+    <Link href={item?.url ?? "#"} target="_blank" className="flex-5">
+      <article
         style={{ backgroundImage: isLoading || hasError ? undefined : bgImgStyle }}
-        className={`relative ${bgColorStyle} gap-4 w-full h-90
-          p-8 bg-center bg-cover shrink-0 flex flex-col justify-end
-          text-white sm:h-120 lg:h-full rounded-4xl`}
+          className={`relative ${bgColorStyle} gap-4 w-full h-90
+            p-8 bg-center bg-cover shrink-0 flex flex-col justify-end
+            text-white sm:h-120 lg:h-full rounded-4xl`}
       >
         {
           isLoading
@@ -41,13 +42,13 @@ export default function MainArticle({ item, isLoading, hasError }: MainArticlePr
               </h1>
         }
 
-        <ImagePlaceholder
+        <ImagePlaceholderIcon
           isLoading={isLoading}
           hasError={hasError}
           width={14}
           height={14}
         />
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 };

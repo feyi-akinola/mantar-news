@@ -8,7 +8,7 @@ import SearchBar from "./SearchBar";
 import ThemeButton from "./ThemeButton";
 import HamburgerMenu from "./HamburgerMenu";
 import CountryPicker from "./CountryPicker";
-import { categories } from "@/app/constants";
+import { categories } from "@/constants/constants";
 import Link from "next/link";
 
 const NavBar = () => {
