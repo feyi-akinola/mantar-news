@@ -9,6 +9,7 @@ import ThemeButton from "./ThemeButton";
 import HamburgerMenu from "./HamburgerMenu";
 import CountryPicker from "./CountryPicker";
 import { categories } from "@/app/constants";
+import Link from "next/link";
 
 const NavBar = () => {
   const [mounted, setMounted] = useState<boolean>(false);
@@ -38,13 +39,14 @@ const NavBar = () => {
         <div className="items-center hidden lg:flex gap-14">
           {
             categories.map((category) => (
-              <p
-                key={category.name}
-                className="flex-center_ gap-2 button-text_ text-xs font-bold text-black/70
-                  dark:text-white/70"
-              >
-                <span>{category.name}</span>
-              </p>
+              <Link key={category.name} href={`/category/${category.name.toLowerCase()}`}>
+                <p
+                  className="flex-center_ gap-2 button-text_ text-xs font-bold text-black/70
+                    dark:text-white/70"
+                >
+                  <span>{category.name}</span>
+                </p>
+              </Link>
             ))
           }
         </div>

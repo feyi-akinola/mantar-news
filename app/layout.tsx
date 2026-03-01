@@ -23,7 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="w-screen overflow-x-hidden" suppressHydrationWarning>
+    <html lang="en" className="w-screen overflow-x-hidden bg-white dark:bg-black/95 text-black/90
+      dark:text-white/90 antialiased" suppressHydrationWarning>
       <body>
         <Providers>
           <NavBar />

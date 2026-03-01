@@ -21,7 +21,7 @@ export default function MainSection({ initialNews, initialError, initialMainStor
   const [mainStory, setMainStory] = useState<NewsArticle | null>(initialMainStory);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-16 lg:gap-12">
+    <div className="flex flex-col lg:flex-row px-6 mb-6 gap-16 lg:gap-12">
       <MainArticle item={mainStory} isLoading={false} hasError={false} />
 
       <Trending

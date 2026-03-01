@@ -1,7 +1,7 @@
 import { routes } from '../api/routes';
-import { transformArticles, transformNewsDataIOArticles } from '@/utils/data';
+import { transformArticles } from '@/utils/data';
 import { NewsArticle } from '@/types/newsArticle';
-import SearchResults from '@/components/SearchResults';
+import SearchResultsClient from '@/components/SearchResults';
 
 async function getSearchResults(query: string): Promise<NewsArticle[]> {
   try {
@@ -20,5 +20,5 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const { query = "" } = await searchParams;
   const results = await getSearchResults(query);
 
-  return <SearchResults query={query} results={results} />;
+  return <SearchResultsClient query={query} results={results} />;
 }

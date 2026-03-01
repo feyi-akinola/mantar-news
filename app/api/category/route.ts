@@ -20,7 +20,7 @@ export async function GET(request: Request) {
         category: category,
         language: "en",
         country,
-        size: 3,
+        size: 10,
         removeduplicate: 1,
       },
       headers: {

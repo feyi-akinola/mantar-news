@@ -57,13 +57,12 @@ export default async function Home() {
   return (
     <div
       id="scroll-wrapper"
-      className="antialiased bg-white text-black/90 dark:bg-black/95
-      dark:text-white/90 tracking-wide min-h-screen pt-20"
+      className="tracking-wide min-h-screen pt-20 bg-white dark:bg-black/95 text-black/90
+      dark:text-white/90"
     >
       <div
         id="scroll-content"
-        className="max-w-[1600px] mx-auto flex flex-col gap-32 w-full p-6
-          xl:gap-24"
+        className="max-w-[1600px] mx-auto flex flex-col gap-32 w-full xl:gap-24"
       >
         <MainSection
           initialNews={latestNews}

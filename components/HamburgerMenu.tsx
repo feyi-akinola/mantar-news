@@ -2,6 +2,7 @@ import { MenuIcon } from "lucide-react";
 import { useState } from "react";
 import SearchBar from "./SearchBar";
 import { categories } from "@/app/constants";
+import Link from "next/link";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -32,13 +33,18 @@ const HamburgerMenu = () => {
         <div className="flex flex-col gap-8 items-start text-2xl">
           {
             categories.map((category) => (
-              <p
+              <Link
                 key={category.name}
-                className="flex-center_ gap-2 button-text_ font-bold text-black/80
-                  dark:text-white/80"
+                href={`/category/${category.name.toLowerCase()}`} 
+                onClick={() => setIsOpen(false)}
               >
-                <span>{category.name}</span>
-              </p>
+                <p                  
+                  className="flex-center_ gap-2 button-text_ font-bold text-black/80
+                    dark:text-white/80"
+                >
+                  <span>{category.name}</span>
+                </p>
+              </Link>
             ))
           }
         </div>
