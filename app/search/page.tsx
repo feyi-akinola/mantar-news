@@ -8,6 +8,7 @@ import { NewsArticle } from '@/types/newsArticle';
 
 // Components
 import SearchResultsClient from '@/components/SearchResults';
+import { capitalizeFirstLetter } from "@/utils/string";
 
 async function getSearchResults(query: string): Promise<NewsArticle[]> {
   try {
@@ -31,8 +32,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ query?: string}> }): Promise<Metadata> {
   const { query = "" } = await searchParams;
-  const queryCaptial = query.substring(0, 1).toUpperCase() + query.substring(1);
-  const title = `"${queryCaptial}" search results | Mantar News`;
+  const title = `"${capitalizeFirstLetter(query)}" search results | Mantar News`;
   const desc = `Search results for "${query}" on Mantar News Network.`;
 
   return {

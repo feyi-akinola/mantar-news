@@ -1,10 +1,13 @@
+"use client";
+
 // Utils
 import { capitalizeFirstLetter } from "@/utils/string";
-import Link from "next/link";
 
 const CategoryChip = ({ category }: { category: string }) => {
+  const url = `/category/${category.toLowerCase()}`;
+
   return (
-    <Link href={`/category/${category.toLowerCase()}`}>
+    <div onClick={() => url && window.open(url, "_blank")}>
       <div
         className="px-2.5 py-1.25 bg-red-100 dark:bg-red-900 rounded-full"
         style={{
@@ -15,7 +18,7 @@ const CategoryChip = ({ category }: { category: string }) => {
           {capitalizeFirstLetter(category)}
         </p>
       </div>
-    </Link>
+    </div>
   );
 };
 

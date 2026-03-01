@@ -8,6 +8,7 @@ import { NewsArticle } from '@/types/newsArticle';
 
 // Components
 import CategoryResultsClient from '@/components/CategoryResults';
+import { capitalizeFirstLetter } from "@/utils/string";
 
 async function getCategoryResults(category: string): Promise<NewsArticle[]> {
   try {
@@ -31,8 +32,7 @@ export default async function CategoryPage({ params } : { params: Promise<{ cate
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string}> }): Promise<Metadata> {
   const { category } = await params;
-  const categoryCaptial = category.substring(0, 1).toUpperCase() + category.substring(1);
-  const title = `${categoryCaptial} | Mantar News`;
+  const title = `${capitalizeFirstLetter(category)} | Mantar News`;
   const desc = `Find out the latest ${category} news on Mantar News Network.`;
 
   return {

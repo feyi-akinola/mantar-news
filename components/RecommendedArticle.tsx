@@ -1,5 +1,6 @@
 // Libraries
 import Image from "next/image";
+import Link from "next/link";
 
 // Components
 import CategoryChip from "@/components/CategoryChip";
@@ -11,7 +12,6 @@ import { NewsArticle } from "@/types/newsArticle";
 
 // Utils
 import { formatTime } from "@/utils/time";
-import Link from "next/link";
 
 interface RecommendedArticleProps {
   item?: NewsArticle;
@@ -23,7 +23,7 @@ interface RecommendedArticleProps {
 
 export default function RecommendedArticle({ item, isLast, hasTag, isLoading, hasError }: RecommendedArticleProps) {
   return (
-    <div onClick={() => item?.url && window.open(item.url, "_blank")}>
+    <Link href={item?.url ?? "#"} target={item?.url ?? "_blank"}>
       <article className="flex-center_ flex-col gap-2 group button-text_">
         { /* Category and Time */}
         {
@@ -99,6 +99,6 @@ export default function RecommendedArticle({ item, isLast, hasTag, isLoading, ha
           }
         </div>
       </article>
-    </div>
+    </Link>
   );
 };
