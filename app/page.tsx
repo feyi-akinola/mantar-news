@@ -1,10 +1,3 @@
-
-// Libraries
-// import { gsap } from "gsap";
-// import { useGSAP } from "@gsap/react";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import { ScrollSmoother } from "gsap/ScrollSmoother";
-
 // Components
 import Categories from "@/components/Categories";
 import MainSection from "@/components/MainSection";
@@ -41,29 +34,10 @@ export default async function Home() {
       return [];
     }
   }
-  
-  // // GSAP
-  // gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-  
-  // useGSAP(() => {
-  //   ScrollSmoother.create({
-  //     wrapper: "#scroll-wrapper",
-  //     content: "#scroll-content",
-  //     smooth: 0.75,
-  //     smoothTouch: 0.1,
-  //   });
-  // }, []);
 
   return (
-    <div
-      id="scroll-wrapper"
-      className="tracking-wide min-h-screen pt-20 bg-white dark:bg-black/95 text-black/90
-      dark:text-white/90"
-    >
-      <div
-        id="scroll-content"
-        className="max-w-[1600px] mx-auto flex flex-col gap-32 w-full xl:gap-24"
-      >
+    <div className="tracking-wide min-h-screen pt-20">
+      <div className="max-w-[1600px] mx-auto flex flex-col gap-32 w-full xl:gap-24">
         <MainSection
           initialNews={latestNews}
           initialError={hasError}

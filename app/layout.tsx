@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 
 // Providers
 import Providers from "@/providers/theme-provider";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Mantar News",
@@ -23,17 +24,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="w-screen overflow-x-hidden bg-white dark:bg-black/95 text-black/90
-      dark:text-white/90 antialiased" suppressHydrationWarning>
+    <html lang="en" className="w-screen overflow-x-hidden antialiased" suppressHydrationWarning>
       <body>
         <Providers>
           <NavBar />
-          
-          {children}
 
-          <Newsletter />
+          <SmoothScroll>
+            {children}
 
-          <Footer />
+            <Newsletter />
+
+            <Footer />
+          </SmoothScroll>          
         </Providers>
       </body>
     </html>

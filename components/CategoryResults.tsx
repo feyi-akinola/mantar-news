@@ -11,8 +11,7 @@ interface Props {
 
 export default function CategoryResultsClient({ category, results }: Props) {
   return (
-    <div className="flex flex-col justify-center items-center gap-10 md:gap-14 p-12
-       bg-white dark:bg-black/95 text-black/90 dark:text-white/90 ">
+    <div className="flex flex-col justify-center items-center gap-10 md:gap-14 p-12">
       <TitleBanner title={category.substring(0, 1).toUpperCase() + category.substring(1)} />
 
       {

@@ -4,12 +4,16 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+
+// Components
 import SearchBar from "./SearchBar";
 import ThemeButton from "./ThemeButton";
 import HamburgerMenu from "./HamburgerMenu";
 import CountryPicker from "./CountryPicker";
+
+// Constants
 import { categories } from "@/constants/constants";
-import Link from "next/link";
 
 const NavBar = () => {
   const [mounted, setMounted] = useState<boolean>(false);
@@ -18,8 +22,8 @@ const NavBar = () => {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="sticky top-0 left-0 right-0 z-50 bg-white/75 p-4 
-      dark:bg-gray-900/80 backdrop-blur-sm">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white/75 p-4 
+      dark:bg-black/70 backdrop-blur-sm">
       <div className="flex-between_ max-w-[1600px] mx-auto">
         <a href="/" className="group flex items-center" >
           <h1 className="text-2xl font-expanded">
