@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" style="margin-bottom: 40px;">
   <br />
     <a href="https://mantar-news.vercel.app" target="_blank">
       <img 
@@ -18,20 +18,21 @@
   <h2 align="center">Mantar News</h3>
 
   <div align="center">
-    A modern, responsive news reader built with Next.js App Router that aggregates headlines from multiple providers and presents them with a clean UI, smooth animations, and dark mode support. Visit <a href="https://mantar-news.vercel.app" target="_blank"><b>here</b></a>
+    A modern, responsive news reader built with Next.js App Router that aggregates headlines from multiple providers and presents them with a clean UI, smooth animations, and dark mode support. Visit <a href="https://mantar-news.vercel.app" target="_blank"><b>here.</b></a>
   </div>
 </div>
 
-### Features
+
+## Features
 - **Latest & Trending**: Curated lists powered by NewsData.io and GNews.
 - **Categories**: Fetch by category (e.g., politics, technology, business).
-- **Editor’s Picks**: Highlighted stories section.
+- **Search Results**: Performant search results page with loading state.
 - **Country picker**: Region-aware headlines via a global Zustand store (default `us`).
 - **Dark mode**: System and user-toggle via `next-themes`.
 - **Smooth UX**: GSAP animations with `ScrollTrigger` and `ScrollSmoother`.
 - **TypeScript-first**: Strong typing for API items and UI models.
 
-### Tech Stack
+## Tech Stack
 - **Framework**: Next.js 16 (App Router)
 - **UI**: React 19, Tailwind CSS v4
 - **Animations**: GSAP + @gsap/react
@@ -40,7 +41,7 @@
 - **Theming**: next-themes
 - **Linting/Types**: ESLint 9, TypeScript 5
 
-### Getting Started
+## Getting Started
 1) Install dependencies
 
 ```bash
@@ -74,13 +75,13 @@ npm run build
 npm start
 ```
 
-### Available Scripts
+## Available Scripts
 - `npm run dev`: Start Next.js in development
 - `npm run build`: Create a production build
 - `npm start`: Run the production server
 - `npm run lint`: Run ESLint
 
-### API Endpoints (App Router)
+## API Endpoints (App Router)
 These internal routes fetch from external news providers and return provider-shaped payloads. UI components map them to the internal `NewsArticle` model.
 
 - `GET /api/latest`
@@ -110,7 +111,7 @@ These internal routes fetch from external news providers and return provider-sha
 - `GET /api/article` (WIP)
 - `GET /api/search` (WIP)
 
-#### Country query param
+### Country query param
 - All endpoints above (except WIP/top) accept `country`, ISO-2 lowercase (e.g., `us`, `gb`, `ca`).
 - Default: `us`.
 - Example:
@@ -119,7 +120,7 @@ These internal routes fetch from external news providers and return provider-sha
 curl "http://localhost:3000/api/latest?country=gb"
 ```
 
-### Data model
+## Data model
 UI components consume a normalized `NewsArticle` shape:
 
 ```ts
@@ -137,7 +138,7 @@ export type NewsArticle = {
 
 Transformation helpers (e.g., `transformNewsDataIOArticles`) map provider responses to this shape. See `utils/data.ts`.
 
-### Project Structure (high level)
+## Project Structure (high level)
 ```
 app/
   api/
@@ -160,16 +161,16 @@ public/
   images/...
 ```
 
-### Notes and Roadmap
+## Notes and Roadmap
 - Some endpoints are intentionally limited to small result sizes (3) for layout.
 - `top`/TheNewsAPI may need an API key and configuration.
 - `search` and `article` routes are currently WIP.
 - `EditorsPicks.tsx` expects a transform utility; ensure imports are wired (`utils/data`).
 - The navbar includes a `CountryPicker` that updates the global country and refetches lists.
 
-### Attribution
+## Attribution
 - Background image: `dark stripes background` by Freepik  
   `https://www.freepik.com/free-psd/dark-stripes-background_1132768.htm#from_element=cross_selling__psd`
 
-### License
+## License
 No license has been specified for this project.
