@@ -2,7 +2,7 @@
   <br />
     <a href="https://mantar-news.vercel.app" target="_blank">
       <img 
-        src=".public/images/mantar-banner-promotion.png" 
+        src="public/images/mantar-banner-promotion.png" 
         alt="Mantar News Banner"
         style="border-radius: 16px; margin-bottom: 10px;"
       />
