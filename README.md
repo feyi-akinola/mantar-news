@@ -1,29 +1,30 @@
-<div align="center" style="margin-bottom: 40px;">
-  <br />
-    <a href="https://mantar-news.vercel.app" target="_blank">
-      <img 
-        src="public/images/mantar-banner-promotion.png" 
-        alt="Mantar News Banner"
-        style="border-radius: 16px; margin-bottom: 10px;"
-      />
-    </a>
-  <br />
-  
-  <div>
-    <img src="https://img.shields.io/badge/-React_JS-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="react.js" style="border-radius: 5px;"/> 
-    <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" style="border-radius: 5px;"/>
-    <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white" alt="vite" style="border-radius: 5px;"/>
-  </div>
+## Try it out
+[🚀 Live Preview](https://mantar-news.vercel.app)
 
+<div align="center">
+  <img 
+    src="public/images/mantar-banner-promotion.png" alt="Mantar News Banner" />
+  
   <h2 align="center">Mantar News</h3>
 
-  <div align="center">
-    A modern, responsive news reader built with Next.js App Router that aggregates headlines from multiple providers and presents them with a clean UI, smooth animations, and dark mode support. Visit <a href="https://mantar-news.vercel.app" target="_blank"><b>here.</b></a>
-  </div>
+  <p align="center">
+    React + Next.js news aggregation site.<br/>
+    Built with React, Next.js App Router, Tailwind CSS, and APIs from TheNewsData and GNews.
+  </p>
+
+  <p>
+    <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=222" />
+    <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white" />
+    <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" />
+    <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind%20CSS-4-38B2AC?logo=tailwindcss&logoColor=white" />
+  </p>
 </div>
 
 
-## Features
+## Overview
+
+Mantar news is a modern, responsive news reader built with Next.js App Router that aggregates headlines from multiple providers and presents them with a clean UI, smooth animations, and dark mode support.
+
 - **Latest & Trending**: Curated lists powered by NewsData.io and GNews.
 - **Categories**: Fetch by category (e.g., politics, technology, business).
 - **Search Results**: Performant search results page with loading state.
